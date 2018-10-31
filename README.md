@@ -4,6 +4,9 @@ Jogo em Assembly para a disciplina de laboratório de arquitetura e organizaçã
 ## LICENÇA
 **MIT** [Leia a licença](LICENSE)
 
+## ESTILO DE CODIFICAÇÃO
+[Leia o estilo de codificação](CODE-STYLE)
+
 ## DEPENDÊNCIAS
 * [MASM32](http://www.masm32.com/)
 * [Irvine](http://kipirvine.com/asm/)
