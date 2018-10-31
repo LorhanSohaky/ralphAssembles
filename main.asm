@@ -6,7 +6,7 @@ INCLUDELIB kernel32.lib
 
 INCLUDE example.asm
 
-corPadrao TEXTEQU %70h                                              ; Cores do jogo
+CORPADRAO TEXTEQU %70h                                              ; Cores do jogo
 
 .DATA
     corAnterior BYTE ?                                              ; Cores do console antes de iniciar o jogo
@@ -19,18 +19,18 @@ corPadrao TEXTEQU %70h                                              ; Cores do j
 main PROC
     call inicializar
 
-    MOV ECX, LENGTHOF msg
-    MOV ESI, OFFSET msg
+    mov ecx, LENGTHOF msg
+    mov esi, OFFSET msg
 
-    print:
-        MOV AL, BYTE PTR [ESI]
-        INC ESI
-        call WriteChar
-        mov EAX, 100
-        call Delay
-        loop print
+print:
+    mov al, BYTE PTR [esi]
+    inc esi
+    call WriteChar
+    mov eax, 100
+    call Delay
+    loop print
 
-    mov EAX, 1000
+    mov eax, 1000
     call Delay
 
     call Crlf
@@ -42,6 +42,7 @@ main PROC
 
     exit
 main ENDP
+
 
 ;---------------------------------------------------------
 ;                        inicializar PROC
@@ -56,7 +57,7 @@ inicializar PROC
     call GetTextColor
     mov corAnterior, al
 
-    mov eax, corPadrao
+    mov eax, CORPADRAO
     call SetTextColor
 
 
@@ -68,6 +69,7 @@ inicializar PROC
 
 inicializar ENDP
 
+
 ;---------------------------------------------------------
 ;                       finalizar PROC
 ;   Restaura a cor padrão do console.  
@@ -75,7 +77,6 @@ inicializar ENDP
 ; Saída: Nada
 ; Requer: Chamar inicializar
 ;---------------------------------------------------------
-
 finalizar PROC
     movzx eax, corAnterior
     call SetTextColor
