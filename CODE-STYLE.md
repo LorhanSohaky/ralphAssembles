@@ -3,6 +3,7 @@
 ## Indentação
 * Utilização apenas de espaços
 * Comentários devem iniciar na coluna 69-70 aninhados verticalmente
+* Instruções executáveis devem ser indentadas com 4 espaços
 * label de código e dados não devem ser indentados
 * Um único espaço entre mnemônico da instrução e operandos
 * Duas linhas em branco entre procedimentos
