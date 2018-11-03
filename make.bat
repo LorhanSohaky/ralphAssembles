@@ -7,6 +7,7 @@ set DEBUG=1
 
 set OBJ=out/%MAIN_FILE:.asm=.obj%
 set LST=out/%MAIN_FILE:.asm=.lst%
+set IN=src/%MAIN_FILE%
 set OUT=bin/%OUT_FILE%
 
 :prepare
@@ -28,7 +29,7 @@ set OUT=bin/%OUT_FILE%
     )
 
 :compile
-    ml %MLFLAGS% /Fo %OBJ% %MAIN_FILE%
+    ml %MLFLAGS% /Fo %OBJ% %IN%
 
 :link
     @echo  Linking: %OBJ%
