@@ -1,5 +1,8 @@
 # ESTILO DE CODIFICAÇÃO
 
+# Codificação de caracteres
+* Os arquivos `.asm` devem ser salvos usando a codificação de caracteres OEM-860.
+
 ## Indentação
 * Utilização apenas de espaços
 * Comentários devem iniciar na coluna 69-70 aninhados verticalmente
@@ -60,6 +63,3 @@ inicializar ENDP
 
 # Operadores aritméticos
 * Espaço ao redos de operadores aritméticos
-
-# Codificação de caracteres
-* Os arquivos devem ser salvos usando UFT-8

@@ -5,9 +5,11 @@ Jogo em Assembly para a disciplina de laboratório de arquitetura e organizaçã
 **MIT** [Leia a licença](LICENSE)
 
 ## ESTILO DE CODIFICAÇÃO
-[Leia o estilo de codificação](CODE-STYLE)
+[Leia o estilo de codificação](CODE-STYLE.md)
 
 ## DEPENDÊNCIAS
 * [MASM32](http://www.masm32.com/)
 * [Irvine](http://kipirvine.com/asm/)
 
+## NOTAS
+É recomendado o uso do Notepad++, já que o mesmo possui a codificação de caracteres OEM-860.
