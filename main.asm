@@ -5,6 +5,7 @@ INCLUDELIB user32.lib
 INCLUDELIB kernel32.lib
 
 INCLUDE example.asm
+INCLUDE instrucoes.asm
 
 CORPADRAO TEXTEQU %70h                                              ; Cores do jogo
 
@@ -18,6 +19,8 @@ CORPADRAO TEXTEQU %70h                                              ; Cores do j
 
 main PROC
     call inicializar
+    
+    call estadoInstrucoes
 
     mov ecx, LENGTHOF msg
     mov esi, OFFSET msg
