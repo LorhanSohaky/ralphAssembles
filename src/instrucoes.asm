@@ -39,17 +39,13 @@ desenharInstrucoes PROC
     mov edx, OFFSET tituloInstrucoes
     call WriteString
     
+    
     mov ecx, OFFSET fimTextoInstrucoes
     sub ecx, OFFSET inicioTextoInstrucoes
     mov esi, OFFSET inicioTextoInstrucoes
-
-exibir:
-    mov al, BYTE PTR [esi]
-    inc esi
-    call WriteChar
-    mov eax, 100
-    call Delay
-    loop exibir
+    mov ebx, 100
+    
+    call escreverStringPorCaracter
     
     ret
 desenharInstrucoes ENDP

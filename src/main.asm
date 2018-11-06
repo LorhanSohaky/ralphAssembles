@@ -4,6 +4,7 @@ INCLUDELIB Irvine32.lib
 INCLUDELIB user32.lib
 INCLUDELIB kernel32.lib
 
+INCLUDE utils.asm
 INCLUDE example.asm
 INCLUDE instrucoes.asm
 
