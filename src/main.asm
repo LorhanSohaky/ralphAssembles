@@ -13,7 +13,7 @@ CORPADRAO TEXTEQU %70h                                              ; Cores do j
 
 .DATA
     corAnterior BYTE ?                                              ; Cores do console antes de iniciar o jogo
-    barraDeTitulo BYTE "Ralph Assembles",0                          ; T¡tulo da janela
+    barraDeTitulo BYTE "Ralph Assembles",0                          ; Título da janela
     msg BYTE "Hello World!",0
     msg2 BYTE "Hello World2!",0
 
@@ -52,9 +52,9 @@ main ENDP
 ;---------------------------------------------------------
 ;                        inicializar PROC
 ;   Guarda as cores do console antes de iniciado o jogo e
-; coloca o nome do jogo no t¡tulo da janela.
+; coloca o nome do jogo no título da janela.
 ; Entrada: Nada
-; Sa¡da: Nada
+; Saída: Nada
 ; Requer: Nada
 ;---------------------------------------------------------
 inicializar PROC
