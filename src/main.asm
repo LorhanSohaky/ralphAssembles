@@ -21,6 +21,7 @@ CORPADRAO TEXTEQU %70h                                              ; Cores do j
 .CODE
 
 main PROC
+    mov ecx, 1
     call escreverTituloFase
     call inicializar
     call estadoCreditos
