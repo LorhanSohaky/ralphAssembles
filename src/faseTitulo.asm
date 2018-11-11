@@ -28,9 +28,8 @@ numero2     BYTE "   ___ ",10,0
 ; Sa¡da: Nada
 ; Requer: Nada
 ;---------------------------------------------------------
-escreverTituloFase PROC
+escreverTituloFase PROC USES ebx eax edx
     mov eax, OFFSET inicioTituloFrase
-    mov ecx, 2
     
 CASO1:
     cmp ecx, 1
