@@ -8,6 +8,7 @@ INCLUDE utils.asm
 INCLUDE example.asm
 INCLUDE instrucoes.asm
 INCLUDE creditos.asm
+INCLUDE faseTitulo.asm
 
 CORPADRAO TEXTEQU %70h                                              ; Cores do jogo
 
@@ -20,6 +21,7 @@ CORPADRAO TEXTEQU %70h                                              ; Cores do j
 .CODE
 
 main PROC
+    call escreverTituloFase
     call inicializar
     call estadoCreditos
     call estadoInstrucoes
