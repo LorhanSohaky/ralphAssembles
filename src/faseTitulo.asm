@@ -29,11 +29,14 @@ numero2     BYTE "   ___ ",10,0
 ; Requer: Nada
 ;---------------------------------------------------------
 escreverTituloFase PROC USES ebx eax edx
-    mov eax, OFFSET inicioTituloFrase
+	jmp INIT
+	casos DWORD CASO1, CASO2
+INIT:
+	mov eax, OFFSET inicioTituloFrase
+	dec ecx
+	jmp casos[4*ecx]
     
 CASO1:
-    cmp ecx, 1
-    jne CASO2
     mov ebx, OFFSET numero1
     jmp FACA
 
