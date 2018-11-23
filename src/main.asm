@@ -20,9 +20,7 @@ INCLUDE menu.asm
 main PROC
     call inicializar
     
-    call limparTela
-    
-    ;call estadoMenu
+    call estadoMenu
     
     call finalizar
 
