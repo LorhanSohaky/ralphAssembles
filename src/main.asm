@@ -9,6 +9,7 @@ INCLUDE example.asm
 INCLUDE instrucoes.asm
 INCLUDE creditos.asm
 INCLUDE faseTitulo.asm
+INCLUDE menu.asm
 
 CORPADRAO TEXTEQU %70h                                              ; Cores do jogo
 
@@ -21,6 +22,7 @@ CORPADRAO TEXTEQU %70h                                              ; Cores do j
 .CODE
 
 main PROC
+    call estadoMenu
     mov ecx, 1
     call escreverTituloFase
     call inicializar
