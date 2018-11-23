@@ -27,6 +27,10 @@ sairSelecionado             BYTE   "                                        ->  
 .CODE
 
 desenharMenuJogar PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
     mov edx, OFFSET inicioTitulo
     call WriteString
     
@@ -46,6 +50,10 @@ desenharMenuJogar PROC
 desenharMenuJogar ENDP
 
 desenharMenuInstrucoes PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
     mov edx, OFFSET inicioTitulo
     call WriteString
     
@@ -66,6 +74,10 @@ desenharMenuInstrucoes ENDP
 
 
 desenharMenuCreditos PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
     mov edx, OFFSET inicioTitulo
     call WriteString
     
@@ -85,6 +97,10 @@ desenharMenuCreditos PROC
 desenharMenuCreditos ENDP
 
 desenharMenuSair PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
     mov edx, OFFSET inicioTitulo
     call WriteString
     
@@ -107,7 +123,7 @@ desenharMenuSair ENDP
 estadoMenu PROC
 
 MENUJOGAR:
-    call Clrscr
+    call limparTela
     call desenharMenuJogar
     
 LETECLADOJ:
@@ -126,7 +142,7 @@ LETECLADOJ:
     jmp MENUJOGAR
 
 MENUCREDITOS:
-    call Clrscr
+    call limparTela
     call desenharMenuCreditos
     
 LETECLADOC:
@@ -144,14 +160,13 @@ LETECLADOC:
     
     cmp dx, VK_SPACE
     jne VOLTAC
-    call Clrscr
     call estadoCreditos
     
 VOLTAC:    
     jmp MENUCREDITOS
     
 MENUINSTRUCOES:
-    call Clrscr
+    call limparTela
     call desenharMenuInstrucoes
     
 LETECLADOI:
@@ -169,14 +184,13 @@ LETECLADOI:
     
     cmp dx, VK_SPACE
     jne VOLTAI
-    call Clrscr
     call estadoInstrucoes
 
 VOLTAI:
     jmp MENUINSTRUCOES
     
 MENUSAIR:
-    call Clrscr
+    call limparTela
     call desenharMenuSair
     
 LETECLADOS:
