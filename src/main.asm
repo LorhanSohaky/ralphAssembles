@@ -1,12 +1,12 @@
 INCLUDE Irvine32.inc
+INCLUDE win32.inc
 
 INCLUDELIB Irvine32.lib
 INCLUDELIB user32.lib
 INCLUDELIB kernel32.lib
 
-COLS = 80               ; number of columns
-ROWS = 25               ; number of rows
-CHAR_ATTRIBUTE = 0Fh    ; bright white foreground
+
+INCLUDE config.asm                                                  ; Arquivo com as configura‡”es do projeto
 
 INCLUDE utils.asm
 INCLUDE example.asm
@@ -15,20 +15,14 @@ INCLUDE creditos.asm
 INCLUDE faseTitulo.asm
 INCLUDE menu.asm
 
-CORPADRAO TEXTEQU %70h                                              ; Cores do jogo
-
-.DATA
-    corAnterior BYTE ?                                              ; Cores do console antes de iniciar o jogo
-    barraDeTitulo BYTE "Ralph Assembles",0                          ; Título da janela
-    msg BYTE "Hello World!",0
-    msg2 BYTE "Hello World2!",0
-
 .CODE
 
 main PROC
     call inicializar
     
-    call estadoMenu
+    call limparTela
+    
+    ;call estadoMenu
     
     call finalizar
 
@@ -45,9 +39,15 @@ main ENDP
 ; Requer: Nada
 ;---------------------------------------------------------
 inicializar PROC
+    INVOKE GetStdHandle, STD_OUTPUT_HANDLE
+    mov outHandle, eax
+    
+    INVOKE GetConsoleCursorInfo, outHandle, OFFSET cursorInfo
 
     call GetTextColor
     mov corAnterior, al
+    
+    
 
     mov eax, CORPADRAO
     call SetTextColor
@@ -56,6 +56,11 @@ inicializar PROC
 
     push OFFSET barraDeTitulo
     call SetConsoleTitle
+    
+    mov cursorInfo.dwSize, 1
+    mov cursorInfo.bVisible, 0
+    INVOKE SetConsoleCursorInfo, outHandle, OFFSET cursorInfo
+    INVOKE SetConsoleScreenBufferSize, outHandle, scrSize
 
     ret
 
