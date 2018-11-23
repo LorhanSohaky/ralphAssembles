@@ -142,6 +142,12 @@ LETECLADOC:
     cmp dx,VK_DOWN
     je MENUJOGAR
     
+    cmp dx, VK_SPACE
+    jne VOLTAC
+    call Clrscr
+    call estadoCreditos
+    
+VOLTAC:    
     jmp MENUCREDITOS
     
 MENUINSTRUCOES:
@@ -160,7 +166,13 @@ LETECLADOI:
     
     cmp dx,VK_DOWN
     je MENUSAIR
+    
+    cmp dx, VK_SPACE
+    jne VOLTAI
+    call Clrscr
+    call estadoInstrucoes
 
+VOLTAI:
     jmp MENUINSTRUCOES
     
 MENUSAIR:
