@@ -22,6 +22,10 @@ fimTextoCreditos    BYTE 0
 ; Requer: Nada
 ;---------------------------------------------------------
 estadoCreditos PROC
+    call limparTela
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
     call desenharCreditos
     call ReadChar
     ret

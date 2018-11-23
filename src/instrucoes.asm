@@ -22,6 +22,10 @@ fimTextoInstrucoes  BYTE 0
 ; Requer: Nada
 ;---------------------------------------------------------
 estadoInstrucoes PROC
+    call limparTela
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
     call desenharInstrucoes
     call ReadChar
     ret
