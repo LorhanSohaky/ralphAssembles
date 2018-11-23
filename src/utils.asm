@@ -21,7 +21,6 @@ exibir:
 escreverStringPorCaracter ENDP
 
 
-
 ;---------------------------------------------------------
 ;                 limparTela PROC
 ;   Limpa a tela
@@ -29,7 +28,7 @@ escreverStringPorCaracter ENDP
 ; Sa¡da: Nada
 ; Requer: Nada
 ;---------------------------------------------------------
-limparTela PROC
+limparTela PROC USES ecx 
     xor ecx, ecx
 LIMPAR :
     mov scrBuffer[ecx * CHAR_INFO].Char, 0
