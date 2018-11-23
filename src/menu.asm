@@ -26,100 +26,13 @@ sairSelecionado             BYTE   "                                        ->  
 
 .CODE
 
-desenharMenuJogar PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
-    
-    mov edx, OFFSET inicioTitulo
-    call WriteString
-    
-    mov edx, OFFSET creditos
-    call WriteString
-    
-    mov edx, OFFSET jogarSelecionado
-    call WriteString
-    
-    mov edx, OFFSET instrucoes
-    call WriteString
-    
-    mov edx, OFFSET sair
-    call WriteString
-   
-    ret
-desenharMenuJogar ENDP
-
-desenharMenuInstrucoes PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
-    
-    mov edx, OFFSET inicioTitulo
-    call WriteString
-    
-    mov edx, OFFSET creditos
-    call WriteString
-    
-    mov edx, OFFSET jogar
-    call WriteString
-    
-    mov edx, OFFSET instrucoesSelecionado
-    call WriteString
-    
-    mov edx, OFFSET sair
-    call WriteString
-    
-    ret
-desenharMenuInstrucoes ENDP
-
-
-desenharMenuCreditos PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
-    
-    mov edx, OFFSET inicioTitulo
-    call WriteString
-    
-    mov edx, OFFSET creditosSelecionado
-    call WriteString
-    
-    mov edx, OFFSET jogar
-    call WriteString
-    
-    mov edx, OFFSET instrucoes
-    call WriteString
-    
-    mov edx, OFFSET sair
-    call WriteString
-    
-    ret
-desenharMenuCreditos ENDP
-
-desenharMenuSair PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
-    
-    mov edx, OFFSET inicioTitulo
-    call WriteString
-    
-    mov edx, OFFSET creditos
-    call WriteString
-    
-    mov edx, OFFSET jogar
-    call WriteString
-    
-    mov edx, OFFSET instrucoes
-    call WriteString
-    
-    mov edx, OFFSET sairSelecionado
-    call WriteString
-    
-    ret
-desenharMenuSair ENDP
-
-
+;---------------------------------------------------------
+;                    estadoMenu PROC
+;   Estado menu
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
 estadoMenu PROC
 
 MENUJOGAR:
@@ -214,3 +127,127 @@ LETECLADOS:
 FIM:
     ret
 estadoMenu ENDP
+
+
+;---------------------------------------------------------
+;                    desenharMenuJogar PROC
+;   Desenha o menu, com o item jogar selecionado
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+desenharMenuJogar PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
+    mov edx, OFFSET inicioTitulo
+    call WriteString
+    
+    mov edx, OFFSET creditos
+    call WriteString
+    
+    mov edx, OFFSET jogarSelecionado
+    call WriteString
+    
+    mov edx, OFFSET instrucoes
+    call WriteString
+    
+    mov edx, OFFSET sair
+    call WriteString
+   
+    ret
+desenharMenuJogar ENDP
+
+
+;---------------------------------------------------------
+;                desenharMenuInstrucoes PROC
+;   Desenha o menu, com o item instru‡”es selecionado
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+desenharMenuInstrucoes PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
+    mov edx, OFFSET inicioTitulo
+    call WriteString
+    
+    mov edx, OFFSET creditos
+    call WriteString
+    
+    mov edx, OFFSET jogar
+    call WriteString
+    
+    mov edx, OFFSET instrucoesSelecionado
+    call WriteString
+    
+    mov edx, OFFSET sair
+    call WriteString
+    
+    ret
+desenharMenuInstrucoes ENDP
+
+
+;---------------------------------------------------------
+;                   desenharMenuCreditos PROC
+;   Desenha o menu, com o item cr‚ditos selecionado
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+desenharMenuCreditos PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
+    mov edx, OFFSET inicioTitulo
+    call WriteString
+    
+    mov edx, OFFSET creditosSelecionado
+    call WriteString
+    
+    mov edx, OFFSET jogar
+    call WriteString
+    
+    mov edx, OFFSET instrucoes
+    call WriteString
+    
+    mov edx, OFFSET sair
+    call WriteString
+    
+    ret
+desenharMenuCreditos ENDP
+
+
+;---------------------------------------------------------
+;                    desenharMenuSair PROC
+;   Desenha o menu, com o item sair selecionado
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+desenharMenuSair PROC
+    mov  dl,0
+    mov  dh,0
+    call Gotoxy
+    
+    mov edx, OFFSET inicioTitulo
+    call WriteString
+    
+    mov edx, OFFSET creditos
+    call WriteString
+    
+    mov edx, OFFSET jogar
+    call WriteString
+    
+    mov edx, OFFSET instrucoes
+    call WriteString
+    
+    mov edx, OFFSET sairSelecionado
+    call WriteString
+    
+    ret
+desenharMenuSair ENDP
