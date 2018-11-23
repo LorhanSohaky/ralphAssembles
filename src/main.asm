@@ -9,7 +9,6 @@ INCLUDELIB kernel32.lib
 INCLUDE config.asm                                                  ; Arquivo com as configura‡”es do projeto
 
 INCLUDE utils.asm
-INCLUDE example.asm
 INCLUDE instrucoes.asm
 INCLUDE creditos.asm
 INCLUDE faseTitulo.asm
