@@ -4,6 +4,10 @@ INCLUDELIB Irvine32.lib
 INCLUDELIB user32.lib
 INCLUDELIB kernel32.lib
 
+COLS = 80               ; number of columns
+ROWS = 25               ; number of rows
+CHAR_ATTRIBUTE = 0Fh    ; bright white foreground
+
 INCLUDE utils.asm
 INCLUDE example.asm
 INCLUDE instrucoes.asm
@@ -22,32 +26,10 @@ CORPADRAO TEXTEQU %70h                                              ; Cores do j
 .CODE
 
 main PROC
-    call estadoMenu
-    mov ecx, 1
-    call escreverTituloFase
     call inicializar
-    call estadoCreditos
-    call estadoInstrucoes
-
-    mov ecx, LENGTHOF msg
-    mov esi, OFFSET msg
-
-print:
-    mov al, BYTE PTR [esi]
-    inc esi
-    call WriteChar
-    mov eax, 100
-    call Delay
-    loop print
-
-    mov eax, 1000
-    call Delay
-
-    call Crlf
-
-    mov edx, OFFSET msg2
-    call exemplo
-
+    
+    call estadoMenu
+    
     call finalizar
 
     exit
