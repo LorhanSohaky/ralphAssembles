@@ -71,40 +71,61 @@ atualizaPersonagem PROC
 	call limparTela
 	mov edx, ebx
 	
-	
-	mov  bl,ralph.posicaoX
-    mov  bh,ralph.posicaoY
-	
 	cmp dx,VK_UP
 	jne BAIXO
-	sub bh, 1
+	sub ralph.posicaoY, 1
+	call verificaColisao
+	add ralph.posicaoY, al
 	jmp DESENHA
 	
 BAIXO:
 	cmp dx,VK_DOWN
 	jne ESQUERDA
-	add bh, 1
+	add ralph.posicaoY, 1
+	call verificaColisao
+	sub ralph.posicaoY, al
 	jmp DESENHA
 
 ESQUERDA:
 	cmp dx,VK_LEFT
 	jne DIREITA
-	sub bl, 1
+	sub ralph.posicaoX, 1
+	call verificaColisao
+	add ralph.posicaoX, al
 	jmp DESENHA
 
 DIREITA:
 	cmp dx,VK_RIGHT
 	jne L1
-	add bl, 1
+	add ralph.posicaoX, 1
+	call verificaColisao
+	sub ralph.posicaoX, al
 	jmp DESENHA
 
 DESENHA:
-	mov dh, bh
-	mov dl, bl
-	
-	mov ralph.posicaoY, dh
-	mov ralph.posicaoX, dl
 	call desenhaRalph
 L1:	
 	ret
 atualizaPersonagem endp
+
+verificaColisao PROC
+	cmp ralph.posicaoY, 0
+	jl COLISAO
+	mov al, ralph.posicaoY
+	add al, 1
+	cmp al, ROWS
+	je COLISAO
+	mov al, ralph.posicaoX
+	add al, 4
+	cmp al, COLS
+	ja COLISAO
+	cmp ralph.posicaoX, 0
+	jge NCOLISAO
+COLISAO:
+	mov al, 1
+	jmp BYE
+NCOLISAO:
+	mov al,0
+BYE:
+	ret
+verificaColisao endp
