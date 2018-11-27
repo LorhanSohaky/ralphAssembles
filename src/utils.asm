@@ -40,3 +40,17 @@ LIMPAR :
     INVOKE WriteConsoleOutput, outHandle, OFFSET scrBuffer, scrSize, scrCoord, OFFSET scrRect
     ret
 limparTela ENDP
+
+;---------------------------------------------------------
+;                 gotoInicio PROC
+;   Vai para o in¡cio da tela
+; Entrada: Nada
+; Sa¡da: dl, dh
+; Requer: Nada
+;---------------------------------------------------------
+gotoInicio PROC USES ecx 
+    mov dl,0
+    mov dh,0
+    call Gotoxy
+    ret
+gotoInicio ENDP
