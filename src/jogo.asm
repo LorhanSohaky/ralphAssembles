@@ -1,5 +1,3 @@
-delayLeitura = 50
-
 RalphStruct STRUCT
     quantidadeVidas BYTE ?
     posicaoX BYTE ?
@@ -74,10 +72,9 @@ desenhaRalph PROC
 
 desenhaRalph ENDP
 
+
 estadoJogar PROC
-	mov dl,0
-    mov dh,0
-    call Gotoxy
+	call gotoInicio
 	mov edx, OFFSET cenario
 	call WriteString
 	
@@ -90,7 +87,7 @@ INICIAL:
 	call desenhaRalph
 	
 LETECLADO:
-    mov  eax, delayLeitura
+    mov  eax, DELAY_LEITURA
     call Delay
     
     call ReadKey
@@ -112,6 +109,7 @@ ATUALIZA:
 	
 	ret
 estadoJogar endp
+
 
 atualizaPersonagem PROC
 	mov ebx, edx
@@ -158,6 +156,7 @@ DESENHA:
 L1:	
 	ret
 atualizaPersonagem endp
+
 
 verificaColisao PROC
 	cmp ralph.posicaoY, 0

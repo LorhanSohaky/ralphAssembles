@@ -1,6 +1,8 @@
 COLS TEXTEQU %140
 ROWS TEXTEQU %40
 
+DELAY_LEITURA TEXTEQU %50
+
 CORPADRAO TEXTEQU %70h                                              ; Cores do jogo
 
 .DATA

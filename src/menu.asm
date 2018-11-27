@@ -1,5 +1,3 @@
-delayLeitura = 50
-
 .DATA
 
 inicioTitulo                BYTE   "    ____          __        __       ___                                  __     __           ", 10
@@ -40,7 +38,7 @@ MENUJOGAR:
     call desenharMenuJogar
     
 LETECLADOJ:
-    mov  eax, delayLeitura
+    mov  eax, DELAY_LEITURA
     call Delay
     
     call ReadKey
@@ -62,7 +60,7 @@ MENUCREDITOS:
     call desenharMenuCreditos
     
 LETECLADOC:
-    mov  eax, delayLeitura
+    mov  eax, DELAY_LEITURA
     call Delay
     
     call ReadKey
@@ -86,7 +84,7 @@ MENUINSTRUCOES:
     call desenharMenuInstrucoes
     
 LETECLADOI:
-    mov  eax, delayLeitura
+    mov  eax, DELAY_LEITURA
     call Delay
     
     call ReadKey
@@ -110,7 +108,7 @@ MENUSAIR:
     call desenharMenuSair
     
 LETECLADOS:
-    mov  eax, delayLeitura
+    mov  eax, DELAY_LEITURA
     call Delay
     
     call ReadKey
