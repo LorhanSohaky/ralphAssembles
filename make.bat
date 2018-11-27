@@ -34,3 +34,7 @@ set OUT=bin/%OUT_FILE%
 :link
     @echo  Linking: %OBJ%
     link %LINKFLAGS% %OBJ% /OUT:%OUT%
+    set /p teste=""
+    cd bin
+    jogo.exe
+
