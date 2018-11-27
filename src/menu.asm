@@ -51,6 +51,9 @@ LETECLADOJ:
     
     cmp dx,VK_DOWN
     je MENUINSTRUCOES
+	
+	cmp dx, VK_SPACE
+    je estadoJogar
     
     jmp MENUJOGAR
 
