@@ -7,6 +7,47 @@ RalphStruct STRUCT
 RalphStruct ENDS
 
 .DATA
+	cenario BYTE "1                                                                                                                                          ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+            BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",10
+			BYTE "1                                                                                                                       ",0
+			
 	ralph RalphStruct <3, 10, 10>
 	
 	desenho1 BYTE "*****",0
@@ -34,11 +75,17 @@ desenhaRalph PROC
 desenhaRalph ENDP
 
 estadoJogar PROC
-	call limparTela
+	mov dl,0
+    mov dh,0
+    call Gotoxy
+	mov edx, OFFSET cenario
+	call WriteString
+	
 INICIAL:
 	mov  dl,ralph.posicaoX
     mov  dh,ralph.posicaoY
     call Gotoxy
+	
 	
 	call desenhaRalph
 	
@@ -68,7 +115,11 @@ estadoJogar endp
 
 atualizaPersonagem PROC
 	mov ebx, edx
-	call limparTela
+	mov dl,0
+    mov dh,0
+    call Gotoxy
+	mov edx, OFFSET cenario
+	call WriteString
 	mov edx, ebx
 	
 	cmp dx,VK_UP
