@@ -13,3 +13,27 @@ Jogo em Assembly para a disciplina de laboratório de arquitetura e organizaçã
 
 ## NOTAS
 É recomendado o uso do Notepad++, já que o mesmo possui a codificação de caracteres OEM-860.
+
+
+### TODO
+- [ ] ~~Construção da máquina de estados geral;~~
+- [x] Construção da máquina de estados da tela de menu;
+- [x] Criação das telas de menu;
+- [ ] Construção da máquina de estados do jogo;
+- [ ] Criação da máquina de estados das fases;
+- [ ] Procedimento para desenhar personagens e ambiente;
+- [ ] Procedimento para ler dados do teclado;
+- [ ] Procedimento para verificar colisão;
+- [x] Criação da tela de instruções;
+- [x] Criação da tela de créditos;
+- [x] Criação das telas de apresentação de fase;
+- [ ] Procedimento para inicializar posição dos personagens;
+- [ ] Procedimento para verificar conserto de janela;
+- [ ] Procedimento para sortear janelas quebradas;
+- [ ] Procedimento para sortear bit jogado pelo inimigo Felix;
+- [x] Procedimento para movimentar personagem;
+- [ ] Criação da tela de ganhou;
+- [ ] Criação da tela de perdeu;
+- [ ] Procedimento para atualizar vidas;
+- [ ] Procedimento para verificar resultado;
+- [ ] Procedimento para desenhar Felix;
