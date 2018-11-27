@@ -4,6 +4,11 @@ RalphStruct STRUCT
     posicaoY BYTE ?
 RalphStruct ENDS
 
+BitStruct STRUCT
+    posicaoX BYTE ?
+    posicaoY BYTE ?
+BitStruct ENDS
+
 .DATA
 	cenario BYTE "                                                                                                                                           ",10
             BYTE "                                                                                                                                           ",10
@@ -47,11 +52,23 @@ RalphStruct ENDS
 			BYTE "                        º                                                                                                                  ",0
 			
 	ralph RalphStruct <3, 10, 10>
+    bit BitStruct <0,0>
 	
 	desenho1 BYTE "*****",0
 	desenho2 BYTE " -- ",0
 	
 .CODE
+
+sortearBit PROC 
+    mov eax, COLS
+    call RandomRange
+    
+    mov bit.posicaoX, al
+    mov bit.posicaoY, 0
+    
+    ret
+sortearBit ENDP
+
 
 desenhaRalph PROC
 
