@@ -7,7 +7,7 @@ RalphStruct STRUCT
 RalphStruct ENDS
 
 .DATA
-	cenario BYTE "1                                                                                                                                          ",10
+	cenario BYTE "1     .                                                                                                                                    ",10
             BYTE "1                                                                                                                       ",10
 			BYTE "1                                                                                                                       ",10
 			BYTE "1                                                                                                                       ",10
