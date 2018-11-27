@@ -7,46 +7,46 @@ RalphStruct STRUCT
 RalphStruct ENDS
 
 .DATA
-	cenario BYTE "1     .                                                                                                                                    ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-            BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",10
-			BYTE "1                                                                                                                       ",0
+	cenario BYTE "                                                                                                                                           ",10
+            BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+            BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+            BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+            BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+            BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+            BYTE "                                                                                                                                           ",10
+			BYTE "                                                                                                                                           ",10
+			BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+            BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+            BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",10
+			BYTE "                        º                                                                                                                  ",0
 			
 	ralph RalphStruct <3, 10, 10>
 	
