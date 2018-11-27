@@ -37,4 +37,5 @@ set OUT=bin/%OUT_FILE%
     set /p teste=""
     cd bin
     jogo.exe
+    cd ..
 
