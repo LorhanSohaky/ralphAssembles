@@ -56,15 +56,18 @@ BitStruct ENDS
 	
 	desenho1 BYTE "*",0
 	desenho2 BYTE "*",0
+    
+    desenhoBit BYTE "1", 0
 	
 .CODE
 
 sortearBit PROC 
-    mov eax, COLS
+    mov eax, 71
     call RandomRange
     
+    add al, 34
     mov bit.posicaoX, al
-    mov bit.posicaoY, 0
+    mov bit.posicaoY, 4
     
     ret
 sortearBit ENDP
@@ -89,38 +92,44 @@ desenhaRalph PROC
 
 desenhaRalph ENDP
 
+atualizarBit PROC
+    add bit.posicaoY, 1
+ 
+    cmp bit.posicaoY, ROWS
+    jb DESENHA_BIT
+    call sortearBit
+    
+DESENHA_BIT:
+    mov dl,bit.posicaoX
+    mov dh,bit.posicaoY
+    call Gotoxy
+    mov edx, OFFSET desenhoBit
+    call WriteString
+    ret
+atualizarBit ENDP
+
 
 estadoJogar PROC
-	call gotoInicio
-	mov edx, OFFSET cenario
-	call WriteString
 	
 INICIAL:
-	mov  dl,ralph.posicaoX
-    mov  dh,ralph.posicaoY
-    call Gotoxy
-	
-	
-	call desenhaRalph
+    call sortearBit
 	
 LETECLADO:
+    call gotoInicio
+	mov edx, OFFSET cenario
+	call WriteString
+    
+    call desenhaRalph
+    
+    call atualizarBit
+    
     mov  eax, DELAY_LEITURA
-    call Delay
+    call Delay  
     
     call ReadKey
-    jz LETECLADO
 	
-	cmp dx,VK_UP
-	je ATUALIZA
-	cmp dx,VK_DOWN
-	je ATUALIZA
-	cmp dx, VK_LEFT
-	je ATUALIZA
-	cmp dx, VK_RIGHT
-	jne LETECLADO
-
-ATUALIZA:
 	call atualizaPersonagem
+    
 	
 	jmp LETECLADO
 	
@@ -129,20 +138,13 @@ estadoJogar endp
 
 
 atualizaPersonagem PROC
-	mov ebx, edx
-	mov dl,0
-    mov dh,0
-    call Gotoxy
-	mov edx, OFFSET cenario
-	call WriteString
-	mov edx, ebx
 	
 	cmp dx,VK_UP
 	jne BAIXO
 	sub ralph.posicaoY, PULO_Y
 	call verificaColisao
 	add ralph.posicaoY, al
-	jmp DESENHA
+	jmp L1
 	
 BAIXO:
 	cmp dx,VK_DOWN
@@ -150,7 +152,7 @@ BAIXO:
 	add ralph.posicaoY, PULO_Y
 	call verificaColisao
 	sub ralph.posicaoY, al
-	jmp DESENHA
+	jmp L1
 
 ESQUERDA:
 	cmp dx,VK_LEFT
@@ -158,7 +160,7 @@ ESQUERDA:
 	sub ralph.posicaoX, PULO_X
 	call verificaColisao
 	add ralph.posicaoX, al
-	jmp DESENHA
+	jmp L1
 
 DIREITA:
 	cmp dx,VK_RIGHT
@@ -166,10 +168,7 @@ DIREITA:
 	add ralph.posicaoX, PULO_X
 	call verificaColisao
 	sub ralph.posicaoX, al
-	jmp DESENHA
 
-DESENHA:
-	call desenhaRalph
 L1:	
 	ret
 atualizaPersonagem endp
