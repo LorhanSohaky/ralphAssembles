@@ -139,7 +139,7 @@ atualizaPersonagem PROC
 	
 	cmp dx,VK_UP
 	jne BAIXO
-	sub ralph.posicaoY, 10
+	sub ralph.posicaoY, PULO_Y
 	call verificaColisao
 	add ralph.posicaoY, al
 	jmp DESENHA
@@ -147,7 +147,7 @@ atualizaPersonagem PROC
 BAIXO:
 	cmp dx,VK_DOWN
 	jne ESQUERDA
-	add ralph.posicaoY, 10
+	add ralph.posicaoY, PULO_Y
 	call verificaColisao
 	sub ralph.posicaoY, al
 	jmp DESENHA
@@ -155,7 +155,7 @@ BAIXO:
 ESQUERDA:
 	cmp dx,VK_LEFT
 	jne DIREITA
-	sub ralph.posicaoX, 21
+	sub ralph.posicaoX, PULO_X
 	call verificaColisao
 	add ralph.posicaoX, al
 	jmp DESENHA
@@ -163,7 +163,7 @@ ESQUERDA:
 DIREITA:
 	cmp dx,VK_RIGHT
 	jne L1
-	add ralph.posicaoX, 21
+	add ralph.posicaoX, PULO_X
 	call verificaColisao
 	sub ralph.posicaoX, al
 	jmp DESENHA
@@ -187,13 +187,13 @@ verificaColisao PROC
     jna NCOLISAO
     
 COLISAOY:
-	mov al, 10
+	mov al, PULO_Y
 	jmp BYE
 COLISAOX:
-	mov al, 21
+	mov al, PULO_X
 	jmp BYE
 NCOLISAO:
-	mov al,0
+	mov al, 0
 BYE:
 	ret
 verificaColisao endp
