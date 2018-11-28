@@ -19,7 +19,7 @@ Jogo em Assembly para a disciplina de laboratório de arquitetura e organizaçã
 - [ ] ~~Construção da máquina de estados geral;~~
 - [x] Construção da máquina de estados da tela de menu;
 - [x] Criação das telas de menu;
-- [ ] Construção da máquina de estados do jogo;
+- [ ] ~~Construção da máquina de estados do jogo~~;
 - [ ] Criação da máquina de estados das fases;
 - [ ] Procedimento para desenhar personagens e ambiente;
 - [ ] Procedimento para ler dados do teclado;
