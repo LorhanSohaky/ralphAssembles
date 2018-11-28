@@ -130,6 +130,14 @@ LETECLADO:
 	
 	call atualizaPersonagem
     
+    call verificaColisaoBit
+    
+    mov dh, ROWS - 3
+    mov dl, COLS - 1
+    call Gotoxy
+    movzx eax, ralph.quantidadeVidas
+    call WriteDec
+    
 	
 	jmp LETECLADO
 	
@@ -174,6 +182,32 @@ L1:
 atualizaPersonagem endp
 
 
+
+verificaColisaoBit PROC
+    mov bl, ralph.posicaoX
+    mov bh, ralph.posicaoY
+    
+    cmp bit.posicaoY, bh
+    jb SAIR1
+    add bh, ALTURA_RALPH
+    cmp bit.posicaoY, bh
+    ja SAIR1
+    cmp bit.posicaoX, bl
+    jb SAIR1
+    add bl, LARGURA_RALPH
+    cmp bit.posicaoX, bl
+    ja SAIR1
+    jna PERDE_VIDA
+    
+PERDE_VIDA:
+    dec ralph.quantidadeVidas
+    call sortearBit
+
+SAIR1:    
+    ret
+verificaColisaoBit ENDP
+
+
 verificaColisao PROC
     cmp ralph.posicaoY, MIN_POSICAO_Y
 	jb COLISAOY
@@ -193,6 +227,7 @@ COLISAOX:
 	jmp BYE
 NCOLISAO:
 	mov al, 0
+    
 BYE:
 	ret
 verificaColisao endp
