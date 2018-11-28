@@ -59,6 +59,8 @@ inicializar PROC
     mov cursorInfo.bVisible, 0
     INVOKE SetConsoleCursorInfo, outHandle, OFFSET cursorInfo
     INVOKE SetConsoleScreenBufferSize, outHandle, scrSize
+    
+    INVOKE SetConsoleWindowInfo, outHandle, 1, OFFSET scrRect
 
     ret
 
