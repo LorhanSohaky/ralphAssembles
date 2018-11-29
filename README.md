@@ -23,7 +23,7 @@ Jogo em Assembly para a disciplina de laboratório de arquitetura e organizaçã
 - [ ] Criação da máquina de estados das fases;
 - [ ] Procedimento para desenhar personagens e ambiente;
 - [ ] Procedimento para ler dados do teclado;
-- [ ] Procedimento para verificar colisão;
+- [x] Procedimento para verificar colisão;
 - [x] Criação da tela de instruções;
 - [x] Criação da tela de créditos;
 - [x] Criação das telas de apresentação de fase;
@@ -34,6 +34,6 @@ Jogo em Assembly para a disciplina de laboratório de arquitetura e organizaçã
 - [x] Procedimento para movimentar personagem;
 - [ ] Criação da tela de ganhou;
 - [ ] Criação da tela de perdeu;
-- [ ] Procedimento para atualizar vidas;
+- [x] Procedimento para atualizar vidas;
 - [ ] Procedimento para verificar resultado;
 - [ ] Procedimento para desenhar Felix;
