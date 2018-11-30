@@ -43,3 +43,6 @@ Os sons estão sob licença Creative Commons
 - [x] Procedimento para atualizar vidas;
 - [ ] Procedimento para verificar resultado;
 - [ ] Procedimento para desenhar Felix;
+- [x] Tocar som menu;
+- [x] Tocar som pulo;
+- [ ] Tocar som colisão com bit;
