@@ -1,9 +1,11 @@
 INCLUDE Irvine32.inc
 INCLUDE win32.inc
+INCLUDE winmm.inc
 
 INCLUDELIB Irvine32.lib
 INCLUDELIB user32.lib
 INCLUDELIB kernel32.lib
+INCLUDELIB winmm.lib
 
 
 INCLUDE config.asm                                                  ; Arquivo com as configura‡”es do projeto

@@ -20,6 +20,11 @@ sair                        BYTE   "                                            
 sairSelecionado             BYTE   "                                        ->  SAIR  <-                                             ", 10, 0
 
 
+SND_ASYNC DWORD 01h
+SND_LOOP DWORD 08h
+musicaMenu BYTE "..\assets\menu.wav",0
+
+
 
 
 .CODE
@@ -32,6 +37,9 @@ sairSelecionado             BYTE   "                                        ->  
 ; Requer: Nada
 ;---------------------------------------------------------
 estadoMenu PROC
+    mov eax, SND_ASYNC
+    or eax, SND_LOOP
+    INVOKE PlaySound, OFFSET musicaMenu, NULL, eax
 
 MENUJOGAR:
     call limparTela
