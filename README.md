@@ -46,5 +46,5 @@ Os sons estão sob licença Creative Commons
 - [ ] Procedimento para desenhar Felix;
 - [x] Tocar som menu;
 - [x] Tocar som pulo;
-- [ ] Tocar som colisão com bit;
+- [x] Tocar som colisão com bit;
 - [x] Pintar o bit;

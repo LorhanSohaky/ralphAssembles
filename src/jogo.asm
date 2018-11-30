@@ -61,6 +61,7 @@ BitStruct ENDS
     corConsole BYTE ?
     
     somPulo BYTE "..\assets\pulo.wav",0
+    somColisao BYTE "..\assets\colisao.wav",0
 	
 .CODE
 
@@ -212,6 +213,7 @@ verificaColisaoBit PROC
     
 PERDE_VIDA:
     dec ralph.quantidadeVidas
+    call tocarSomColisao
     call sortearBit
 
 SAIR1:    
@@ -258,3 +260,19 @@ tocarSomPulo PROC
     
     ret
 tocarSomPulo ENDP
+
+
+;---------------------------------------------------------
+;                    tocarSomColisao PROC
+;   Toca o som da colis„o
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+tocarSomColisao PROC
+    mov eax, SND_FILENAME
+    or eax, SND_ASYNC
+    INVOKE PlaySound, OFFSET somColisao, NULL, eax
+    
+    ret
+tocarSomColisao ENDP
