@@ -19,6 +19,7 @@ Os sons estão sob licença Creative Commons
 
 * [News End Signature - mansardian](https://freesound.org/people/mansardian/sounds/61322/) (`menu.wav`)
 * [jumping - fins](https://freesound.org/people/fins/sounds/146726/) (`pulo.wav`)
+* [hit_001 - leviclaassen](https://freesound.org/people/leviclaassen/sounds/107788/) (`colisao.wav`)
 
 
 ### TODO
