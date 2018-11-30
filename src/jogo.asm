@@ -59,7 +59,7 @@ BitStruct ENDS
     
     desenhoBit BYTE "1", 0
     
-    musicaJogo BYTE "..\assets\jogo.wav",0
+    somPulo BYTE "..\assets\pulo.wav",0
 	
 .CODE
 
@@ -114,7 +114,6 @@ atualizarBit ENDP
 estadoJogar PROC
 	
 INICIAL:
-    call tocarSomJogo
     call sortearBit
 	
 LETECLADO:
@@ -152,6 +151,7 @@ atualizaPersonagem PROC
 	
 	cmp dx,VK_UP
 	jne BAIXO
+    call tocarSomPulo
 	sub ralph.posicaoY, PULO_Y
 	call verificaColisao
 	add ralph.posicaoY, al
@@ -160,6 +160,7 @@ atualizaPersonagem PROC
 BAIXO:
 	cmp dx,VK_DOWN
 	jne ESQUERDA
+    call tocarSomPulo
 	add ralph.posicaoY, PULO_Y
 	call verificaColisao
 	sub ralph.posicaoY, al
@@ -168,6 +169,7 @@ BAIXO:
 ESQUERDA:
 	cmp dx,VK_LEFT
 	jne DIREITA
+    call tocarSomPulo
 	sub ralph.posicaoX, PULO_X
 	call verificaColisao
 	add ralph.posicaoX, al
@@ -176,6 +178,7 @@ ESQUERDA:
 DIREITA:
 	cmp dx,VK_RIGHT
 	jne L1
+    call tocarSomPulo
 	add ralph.posicaoX, PULO_X
 	call verificaColisao
 	sub ralph.posicaoX, al
@@ -237,16 +240,16 @@ verificaColisao endp
 
 
 ;---------------------------------------------------------
-;                    tocarSomJogo PROC
-;   Toca o som do jogo
+;                    tocarSomPulo PROC
+;   Toca o som do pulo
 ; Entrada: Nada
 ; Sa¡da: Nada
 ; Requer: Nada
 ;---------------------------------------------------------
-tocarSomJogo PROC USES eax
-    mov eax, SND_ASYNC
-    or eax, SND_LOOP
-    INVOKE PlaySound, OFFSET musicaJogo, NULL, eax
+tocarSomPulo PROC
+    mov eax, SND_FILENAME
+    or eax, SND_ASYNC
+    INVOKE PlaySound, OFFSET somPulo, NULL, eax
     
     ret
-tocarSomJogo ENDP
+tocarSomPulo ENDP
