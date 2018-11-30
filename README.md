@@ -19,6 +19,7 @@ Os sons estão sob licença Creative Commons
 
 * [News End Signature - mansardian](https://freesound.org/people/mansardian/sounds/61322/) (`menu.wav`)
 * [Cheesy morning news tune - Tuben](https://freesound.org/people/Tuben/sounds/272044/) (`jogo.wav`): Editado, cortando o final
+* [jumping - fins](https://freesound.org/people/fins/sounds/146726/) (`pulo.wav`)
 
 
 ### TODO
