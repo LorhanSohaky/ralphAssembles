@@ -58,6 +58,8 @@ BitStruct ENDS
 	desenho2 BYTE "*",0
     
     desenhoBit BYTE "1", 0
+    
+    musicaJogo BYTE "..\assets\jogo.wav",0
 	
 .CODE
 
@@ -112,6 +114,7 @@ atualizarBit ENDP
 estadoJogar PROC
 	
 INICIAL:
+    call tocarSomJogo
     call sortearBit
 	
 LETECLADO:
@@ -231,3 +234,19 @@ NCOLISAO:
 BYE:
 	ret
 verificaColisao endp
+
+
+;---------------------------------------------------------
+;                    tocarSomJogo PROC
+;   Toca o som do jogo
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+tocarSomJogo PROC USES eax
+    mov eax, SND_ASYNC
+    or eax, SND_LOOP
+    INVOKE PlaySound, OFFSET musicaJogo, NULL, eax
+    
+    ret
+tocarSomJogo ENDP
