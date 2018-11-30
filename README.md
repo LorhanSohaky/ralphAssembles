@@ -14,6 +14,11 @@ Jogo em Assembly para a disciplina de laboratório de arquitetura e organizaçã
 ## NOTAS
 É recomendado o uso do Notepad++, já que o mesmo possui a codificação de caracteres OEM-860.
 
+### SONS
+Os sons estão sob licença Creative Commons
+
+* [News End Signature - mansardian](https://freesound.org/people/mansardian/sounds/61322/) (`menu.wav`)
+
 
 ### TODO
 - [ ] ~~Construção da máquina de estados geral;~~
