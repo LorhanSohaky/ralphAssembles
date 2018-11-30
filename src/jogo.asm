@@ -58,6 +58,7 @@ BitStruct ENDS
 	desenho2 BYTE "*",0
     
     desenhoBit BYTE "1", 0
+    corConsole BYTE ?
     
     somPulo BYTE "..\assets\pulo.wav",0
 	
@@ -96,17 +97,21 @@ desenhaRalph ENDP
 
 atualizarBit PROC
     add bit.posicaoY, 1
- 
     cmp bit.posicaoY, ROWS
     jb DESENHA_BIT
     call sortearBit
     
 DESENHA_BIT:
+    
     mov dl,bit.posicaoX
     mov dh,bit.posicaoY
     call Gotoxy
+    mov eax, COR_BIT
+    call SetTextColor
     mov edx, OFFSET desenhoBit
     call WriteString
+    mov eax, CORPADRAO
+    call SetTextColor
     ret
 atualizarBit ENDP
 
