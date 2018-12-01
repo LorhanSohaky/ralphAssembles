@@ -113,7 +113,7 @@ desenhaLJanela ENDP
 
 
 desenhaJanela PROC
-	mov ecx, 9 ;//9 janelas no total
+	mov ecx, QUANTIDADE_JANELAS ;//9 janelas no total
 	mov edx, 0
 	
 VERIFICA:
@@ -126,7 +126,7 @@ PORTA:
 CONTINUA:
 	mov ah, (JanelaStruct PTR janela[edx]).posicaoY
 	push ecx
-	mov ecx, 8 ;//n linhas
+	mov ecx, ALTURA_JANELA + 1 ;//n linhas
 	cmp (JanelaStruct PTR janela[edx]).estado, 1 ;//verifica se o estado ‚ 1 (janela quebrada)
 	je DESENHA
 	jne PROXIMAJANELA
@@ -152,7 +152,7 @@ sorteiaJanelasQuebradas PROC
 	
 SORTEIA:
 	call Randomize
-	mov eax, 9 ;//sorteia um n£mero de 0 a 9 em todo novo loop
+	mov eax, QUANTIDADE_JANELAS ;//sorteia um n£mero de 0 a 9 em todo novo loop
 	call RandomRange
 	mov bl, TYPE JanelaStruct
 	mul bl
@@ -274,11 +274,11 @@ estadoJogar ENDP
 
 reseta PROC
 	mov janelasConcertadas, 0
-	mov ralph.quantidadeVidas, 3
+	mov ralph.quantidadeVidas, QUANTIDADE_VIDAS
 	mov terminou, 0
 	
 	mov ralph.posicaoX, 44
-	mov ralph.posicaoY, 36-ALTURA_RALPH
+	mov ralph.posicaoY, 36 - ALTURA_RALPH
 	
 	mov ecx, 9
 	mov eax, 0
@@ -359,12 +359,12 @@ verificaColisaoJanela PROC
 	jne NAO_VERIFICA
 	
 VERIFICA:
-	mov ecx, 9
+	mov ecx, QUANTIDADE_JANELAS
 	mov esi, 0
 	mov al, ralph.posicaoX
 	mov ah, ralph.posicaoY
 	sub al, 2
-	sub ah, 5
+	sub ah, ALTURA_JANELA - ALTURA_RALPH
 REPETE:
 	cmp al, (JanelaStruct PTR janela[esi]).posicaoX
 	jne PROXIMA_JANELA
