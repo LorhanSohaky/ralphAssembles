@@ -58,6 +58,8 @@ BitStruct ENDS
 	desenho2 BYTE "*",0
     
     desenhoBit BYTE "1", 0
+    bitPosicoes BYTE 39, 44, 57, 65, 81, 86, 98
+    
     corConsole BYTE ?
     
     somPulo BYTE "..\assets\pulo.wav",0
@@ -65,12 +67,14 @@ BitStruct ENDS
 	
 .CODE
 
-sortearBit PROC 
-    mov eax, 71
+sortearBit PROC
+    call Randomize
+    mov eax, LENGTHOF bitPosicoes
     call RandomRange
     
-    add al, 34
-    mov bit.posicaoX, al
+    mov bl, bitPosicoes[eax]
+    
+    mov bit.posicaoX, bl
     mov bit.posicaoY, 4
     
     ret
