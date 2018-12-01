@@ -89,6 +89,8 @@ JanelaStruct ENDS
     corConsole BYTE ?
 	
 	janelasConcertadas BYTE 0
+	
+	terminou BYTE 0
     
     somPulo BYTE "..\assets\pulo.wav",0
     somColisao BYTE "..\assets\colisao.wav",0
@@ -257,10 +259,37 @@ LETECLADO:
     movzx eax, ralph.quantidadeVidas
     call WriteDec
 	
-	jmp LETECLADO
+	call verificaAcabou
 	
+	cmp terminou, 1
+	je TERMINOU_JOGO
+	
+	jmp LETECLADO
+
+TERMINOU_JOGO:
 	ret
 estadoJogar ENDP
+
+
+verificaAcabou PROC
+	cmp ralph.quantidadeVidas, 0
+	je INVOCA_PERDEU
+	cmp janelasConcertadas, JANELAS_QUEBRADAS
+	je INVOCA_GANHOU
+	jmp SAIR_VERIFICAACABOU
+
+INVOCA_PERDEU:
+	INVOKE estadoResultado, PERDEU
+	mov terminou, 1
+	jmp SAIR_VERIFICAACABOU
+	
+INVOCA_GANHOU:
+	INVOKE estadoResultado, GANHOU
+	mov terminou, 1
+
+SAIR_VERIFICAACABOU:
+	ret
+verificaAcabou ENDP
 
 
 atualizaPersonagem PROC
