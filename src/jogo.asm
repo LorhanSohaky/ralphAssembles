@@ -92,8 +92,8 @@ JanelaStruct ENDS
 	
 	terminou BYTE 0
     
-    somPulo BYTE "..\assets\pulo.wav",0
-    somColisao BYTE "..\assets\colisao.wav",0
+    somPulo BYTE "assets\pulo.wav",0
+    somColisao BYTE "assets\colisao.wav",0
 	
 .CODE
 

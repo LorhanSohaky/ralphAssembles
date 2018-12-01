@@ -20,7 +20,7 @@ sair                        BYTE   "                                            
 sairSelecionado             BYTE   "                                        ->  SAIR  <-                                             ", 10, 0
 
 
-musicaMenu BYTE "..\assets\menu.wav",0
+musicaMenu BYTE "assets\menu.wav",0
 
 
 
