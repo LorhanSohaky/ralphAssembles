@@ -36,7 +36,7 @@ Os sons estão sob licença Creative Commons
 - [x] Criação das telas de apresentação de fase;
 - [ ] Procedimento para inicializar posição dos personagens;
 - [ ] Procedimento para verificar conserto de janela;
-- [ ] Procedimento para sortear janelas quebradas;
+- [x] Procedimento para sortear janelas quebradas;
 - [x] Procedimento para sortear bit jogado pelo inimigo Felix;
 - [x] Procedimento para movimentar personagem;
 - [ ] Criação da tela de ganhou;
