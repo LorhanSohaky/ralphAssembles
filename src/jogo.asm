@@ -87,6 +87,8 @@ JanelaStruct ENDS
     bitPosicoes BYTE 39, 44, 57, 65, 81, 86, 98
     
     corConsole BYTE ?
+	
+	janelasConcertadas BYTE 0
     
     somPulo BYTE "..\assets\pulo.wav",0
     somColisao BYTE "..\assets\colisao.wav",0
@@ -244,9 +246,11 @@ LETECLADO:
     call ReadKey
 	
 	call atualizaPersonagem
+	
+	call verificaColisaoJanela
     
     call verificaColisaoBit
-    
+	
     mov dh, ROWS - 3
     mov dl, COLS - 1
     call Gotoxy
@@ -256,7 +260,7 @@ LETECLADO:
 	jmp LETECLADO
 	
 	ret
-estadoJogar endp
+estadoJogar ENDP
 
 
 atualizaPersonagem PROC
@@ -296,7 +300,38 @@ DIREITA:
 
 L1:	
 	ret
-atualizaPersonagem endp
+atualizaPersonagem ENDP
+
+
+verificaColisaoJanela PROC
+	cmp dx, VK_SPACE
+	je VERIFICA
+	jne NAO_VERIFICA
+	
+VERIFICA:
+	mov ecx, 9
+	mov esi, 0
+	mov al, ralph.posicaoX
+	mov ah, ralph.posicaoY
+	sub al, 2
+	sub ah, 5
+REPETE:
+	cmp al, (JanelaStruct PTR janela[esi]).posicaoX
+	jne PROXIMA_JANELA
+	cmp ah, (JanelaStruct PTR janela[esi]).posicaoY
+	je CONCERTOU_JANELA
+	
+PROXIMA_JANELA:
+	add esi, TYPE JanelaStruct
+	loop REPETE
+	
+CONCERTOU_JANELA:
+	mov (JanelaStruct PTR janela[esi]).estado, 0
+	inc janelasConcertadas
+	
+NAO_VERIFICA:
+	ret
+verificaColisaoJanela ENDP
 
 
 verificaColisaoBit PROC
@@ -347,7 +382,7 @@ NCOLISAO:
     
 BYE:
 	ret
-verificaColisao endp
+verificaColisao ENDP
 
 
 ;---------------------------------------------------------
