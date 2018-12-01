@@ -84,8 +84,15 @@ JanelaStruct ENDS
 	desenho2 BYTE "*",0
     
     desenhoBit BYTE "1", 0
+    bitPosicoes BYTE 39, 44, 57, 65, 81, 86, 98
+    
+    corConsole BYTE ?
+    
+    somPulo BYTE "..\assets\pulo.wav",0
+    somColisao BYTE "..\assets\colisao.wav",0
 	
 .CODE
+
 
 desenhaLJanela PROC USES edx ecx
 	mov ecx, edx
@@ -161,12 +168,14 @@ TESTE:
 sorteiaJanelasQuebradas ENDP
 
 
-sortearBit PROC 
-    mov eax, 71
+sortearBit PROC
+    call Randomize
+    mov eax, LENGTHOF bitPosicoes
     call RandomRange
     
-    add al, 34
-    mov bit.posicaoX, al
+    mov bl, bitPosicoes[eax]
+    
+    mov bit.posicaoX, bl
     mov bit.posicaoY, 4
     
     ret
@@ -193,17 +202,21 @@ desenhaRalph ENDP
 
 atualizarBit PROC
     add bit.posicaoY, 1
- 
     cmp bit.posicaoY, ROWS
     jb DESENHA_BIT
     call sortearBit
     
 DESENHA_BIT:
+    
     mov dl,bit.posicaoX
     mov dh,bit.posicaoY
     call Gotoxy
+    mov eax, COR_BIT
+    call SetTextColor
     mov edx, OFFSET desenhoBit
     call WriteString
+    mov eax, CORPADRAO
+    call SetTextColor
     ret
 atualizarBit ENDP
 
@@ -249,6 +262,7 @@ estadoJogar endp
 atualizaPersonagem PROC
 	cmp dx,VK_UP
 	jne BAIXO
+    call tocarSomPulo
 	sub ralph.posicaoY, PULO_Y
 	call verificaColisao
 	add ralph.posicaoY, al
@@ -257,6 +271,7 @@ atualizaPersonagem PROC
 BAIXO:
 	cmp dx,VK_DOWN
 	jne ESQUERDA
+    call tocarSomPulo
 	add ralph.posicaoY, PULO_Y
 	call verificaColisao
 	sub ralph.posicaoY, al
@@ -265,6 +280,7 @@ BAIXO:
 ESQUERDA:
 	cmp dx,VK_LEFT
 	jne DIREITA
+    call tocarSomPulo
 	sub ralph.posicaoX, PULO_X
 	call verificaColisao
 	add ralph.posicaoX, al
@@ -273,6 +289,7 @@ ESQUERDA:
 DIREITA:
 	cmp dx,VK_RIGHT
 	jne L1
+    call tocarSomPulo
 	add ralph.posicaoX, PULO_X
 	call verificaColisao
 	sub ralph.posicaoX, al
@@ -300,6 +317,7 @@ verificaColisaoBit PROC
     
 PERDE_VIDA:
     dec ralph.quantidadeVidas
+    call tocarSomColisao
     call sortearBit
 
 SAIR1:    
@@ -330,3 +348,35 @@ NCOLISAO:
 BYE:
 	ret
 verificaColisao endp
+
+
+;---------------------------------------------------------
+;                    tocarSomPulo PROC
+;   Toca o som do pulo
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+tocarSomPulo PROC
+    mov eax, SND_FILENAME
+    or eax, SND_ASYNC
+    INVOKE PlaySound, OFFSET somPulo, NULL, eax
+    
+    ret
+tocarSomPulo ENDP
+
+
+;---------------------------------------------------------
+;                    tocarSomColisao PROC
+;   Toca o som da colis„o
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+tocarSomColisao PROC
+    mov eax, SND_FILENAME
+    or eax, SND_ASYNC
+    INVOKE PlaySound, OFFSET somColisao, NULL, eax
+    
+    ret
+tocarSomColisao ENDP

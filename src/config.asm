@@ -17,7 +17,8 @@ PULO_Y TEXTEQU %10
 
 DELAY_LEITURA TEXTEQU %50
 
-CORPADRAO TEXTEQU %70h                                              ; Cores do jogo
+CORPADRAO TEXTEQU %0Ah                                              ; Cores do jogo
+COR_BIT TEXTEQU %0Eh
 
 .DATA
     corAnterior BYTE ?                                              ; Cores do console antes de iniciar o jogo

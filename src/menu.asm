@@ -20,6 +20,9 @@ sair                        BYTE   "                                            
 sairSelecionado             BYTE   "                                        ->  SAIR  <-                                             ", 10, 0
 
 
+musicaMenu BYTE "..\assets\menu.wav",0
+
+
 
 
 .CODE
@@ -32,6 +35,7 @@ sairSelecionado             BYTE   "                                        ->  
 ; Requer: Nada
 ;---------------------------------------------------------
 estadoMenu PROC
+    call tocarSomMenu
 
 MENUJOGAR:
     call limparTela
@@ -51,7 +55,10 @@ LETECLADOJ:
     je MENUINSTRUCOES
 	
 	cmp dx, VK_SPACE
-    je estadoJogar
+    jne MENUJOGAR
+    INVOKE PlaySound, NULL, NULL, NULL                              ; Para a m£sica de fundo
+    call estadoJogar
+    call tocarSomMenu
     
     jmp MENUJOGAR
 
@@ -74,7 +81,9 @@ LETECLADOC:
     
     cmp dx, VK_SPACE
     jne VOLTAC
+    INVOKE PlaySound, NULL, NULL, NULL                              ; Para a m£sica de fundo
     call estadoCreditos
+    call tocarSomMenu
     
 VOLTAC:    
     jmp MENUCREDITOS
@@ -98,7 +107,9 @@ LETECLADOI:
     
     cmp dx, VK_SPACE
     jne VOLTAI
+    INVOKE PlaySound, NULL, NULL, NULL                              ; Para a m£sica de fundo
     call estadoInstrucoes
+    call tocarSomMenu
 
 VOLTAI:
     jmp MENUINSTRUCOES
@@ -252,3 +263,19 @@ desenharMenuSair PROC
     
     ret
 desenharMenuSair ENDP
+
+
+;---------------------------------------------------------
+;                    tocarSomMenu PROC
+;   Toca o som do menu
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+tocarSomMenu PROC USES eax
+    mov eax, SND_ASYNC
+    or eax, SND_LOOP
+    INVOKE PlaySound, OFFSET musicaMenu, NULL, eax
+    
+    ret
+tocarSomMenu ENDP
