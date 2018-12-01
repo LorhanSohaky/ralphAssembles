@@ -38,7 +38,6 @@ estadoMenu PROC
     call tocarSomMenu
 
 MENUJOGAR:
-    call limparTela
     call desenharMenuJogar
     
 LETECLADOJ:
@@ -58,12 +57,12 @@ LETECLADOJ:
     jne MENUJOGAR
     INVOKE PlaySound, NULL, NULL, NULL                              ; Para a m£sica de fundo
     call estadoJogar
+    call limparTela
     call tocarSomMenu
     
     jmp MENUJOGAR
 
 MENUCREDITOS:
-    call limparTela
     call desenharMenuCreditos
     
 LETECLADOC:
@@ -83,13 +82,13 @@ LETECLADOC:
     jne VOLTAC
     INVOKE PlaySound, NULL, NULL, NULL                              ; Para a m£sica de fundo
     call estadoCreditos
+    call limparTela
     call tocarSomMenu
     
 VOLTAC:    
     jmp MENUCREDITOS
     
 MENUINSTRUCOES:
-    call limparTela
     call desenharMenuInstrucoes
     
 LETECLADOI:
@@ -109,13 +108,13 @@ LETECLADOI:
     jne VOLTAI
     INVOKE PlaySound, NULL, NULL, NULL                              ; Para a m£sica de fundo
     call estadoInstrucoes
+    call limparTela
     call tocarSomMenu
 
 VOLTAI:
     jmp MENUINSTRUCOES
     
 MENUSAIR:
-    call limparTela
     call desenharMenuSair
     
 LETECLADOS:
@@ -149,9 +148,7 @@ estadoMenu ENDP
 ; Requer: Nada
 ;---------------------------------------------------------
 desenharMenuJogar PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
+    call gotoInicio
     
     mov edx, OFFSET inicioTitulo
     call WriteString
@@ -180,9 +177,7 @@ desenharMenuJogar ENDP
 ; Requer: Nada
 ;---------------------------------------------------------
 desenharMenuInstrucoes PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
+    call gotoInicio
     
     mov edx, OFFSET inicioTitulo
     call WriteString
@@ -211,9 +206,7 @@ desenharMenuInstrucoes ENDP
 ; Requer: Nada
 ;---------------------------------------------------------
 desenharMenuCreditos PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
+    call gotoInicio
     
     mov edx, OFFSET inicioTitulo
     call WriteString
@@ -242,9 +235,7 @@ desenharMenuCreditos ENDP
 ; Requer: Nada
 ;---------------------------------------------------------
 desenharMenuSair PROC
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
+    call gotoInicio
     
     mov edx, OFFSET inicioTitulo
     call WriteString
