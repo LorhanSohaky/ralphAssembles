@@ -11,6 +11,7 @@ INCLUDELIB winmm.lib
 INCLUDE config.asm                                                  ; Arquivo com as configura‡”es do projeto
 
 INCLUDE utils.asm
+INCLUDE resultado.asm
 INCLUDE jogo.asm
 INCLUDE instrucoes.asm
 INCLUDE creditos.asm
