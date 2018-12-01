@@ -9,6 +9,12 @@ BitStruct STRUCT
     posicaoY BYTE ?
 BitStruct ENDS
 
+JanelaStruct STRUCT
+	posicaoX BYTE ?
+	posicaoY BYTE ?
+	estado BYTE ?
+JanelaStruct ENDS
+
 .DATA
 	cenario BYTE "                              รฤฤด  ฺมอหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสมฟ  รฤฤด                              ",10
 			BYTE "                              รฤฤด  ภยอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสอยู  รฤฤด                              ",10
@@ -50,9 +56,29 @@ BitStruct ENDS
 			BYTE "                              รฤฤด ฺู                        ณ ฬอออออออออออน ณ                        ภฟ รฤฤด                              ",10
 			BYTE "                                ฺมฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤด ฬอออออออออออน รฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤมฟ                                ",10
 			BYTE "                                ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤมฤฤฤฤฤฤฤฤฤฤฤมฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู                                ",0
-			
+
+	janelaQuebrada BYTE "    ฺฤฤฤฟ    ",0
+				   BYTE "ฺฤฤฤู   ภฤฤฤฟ",0
+				   BYTE "ภยฤหอออออหฤยู",0
+				   BYTE " ณ บÛÛฐฐฐบ ณ ",0
+				   BYTE " ณ ฬอออออน ณ ",0
+				   BYTE " ณ บฐฐฐÛÛบ ณ ",0
+				   BYTE "ฺมอสอออออสอมฟ",0
+				   BYTE "ภฤฤฤฤฤฤฤฤฤฤฤู",0
+	
+	portaQuebrada BYTE "ษอออออหอออออป",0
+				  BYTE "นÛÛÛฐฐบฐฐฐฐฐฬ",0
+				  BYTE "นÛÛÛฐฐบฐฐฐฐฐฬ",0
+				  BYTE "ฬอออออฮอออออน",0
+				  BYTE "บฐฐฐฐฐบÛÛÛฐฐบ",0
+				  BYTE "บฐฐฐฐฐบÛÛÛฐฐบ",0
+				  BYTE "ฬอออออสอออออน",0
+				  BYTE "ฬอออออออออออน",0
+				  
+				  
 	ralph RalphStruct <3, 44, 36-ALTURA_RALPH>
     bit BitStruct <0,0>
+	janela JanelaStruct <42, 9, 0>, <63, 9, 0>, <84, 9, 0>, <42, 19, 0>, <63, 19, 0>, <84, 19, 0>, <42, 29, 0>, <63, 29, 0>, <84, 29, 0>
 	
 	desenho1 BYTE "*",0
 	desenho2 BYTE "*",0
@@ -60,6 +86,80 @@ BitStruct ENDS
     desenhoBit BYTE "1", 0
 	
 .CODE
+
+desenhaLJanela PROC USES edx ecx
+	mov ecx, edx
+	mov dh, ah
+	mov dl, (JanelaStruct PTR janela[ecx]).posicaoX
+	call Gotoxy
+	mov edx, ebx
+	call WriteString
+	add ebx, SIZEOF janelaQuebrada
+	inc ah
+	
+	ret
+desenhaLJanela ENDP
+
+
+desenhaJanela PROC
+	mov ecx, 9 ;//9 janelas no total
+	mov edx, 0
+	
+VERIFICA:
+	cmp edx, 7*TYPE JanelaStruct
+	je PORTA
+	mov ebx, OFFSET janelaQuebrada
+	jmp CONTINUA
+PORTA:
+	mov ebx, OFFSET portaQuebrada
+CONTINUA:
+	mov ah, (JanelaStruct PTR janela[edx]).posicaoY
+	push ecx
+	mov ecx, 8 ;//n linhas
+	cmp (JanelaStruct PTR janela[edx]).estado, 1 ;//verifica se o estado  1 (janela quebrada)
+	je DESENHA
+	jne PROXIMAJANELA
+
+DESENHA:
+	call desenhaLJanela
+	loop DESENHA
+	
+PROXIMAJANELA:
+	pop ecx
+	inc esi
+	add edx, TYPE JanelaStruct
+	loop VERIFICA
+	
+	ret
+desenhaJanela ENDP
+
+
+sorteiaJanelasQuebradas PROC
+	;//call inicializaJanela ;//inicializa as posi”es iniciais X e Y das janelas
+	
+	mov ecx, JANELAS_QUEBRADAS
+	
+SORTEIA:
+	call Randomize
+	mov eax, 9 ;//sorteia um nฃmero de 0 a 9 em todo novo loop
+	call RandomRange
+	mov bl, TYPE JanelaStruct
+	mul bl
+	
+	cmp (JanelaStruct PTR janela[eax]).estado, 1
+	je TESTE ;//Sorteia novamente
+
+	mov (JanelaStruct PTR janela[eax]).estado, 1 ;//atribui valor 1 nas janelas sortedas (representa a janela quebrada)
+	
+	loop SORTEIA
+
+TESTE:
+	inc ecx ;//Mantm o nฃmero de janelas quebradas (5)
+	loop SORTEIA
+
+	ret
+sorteiaJanelasQuebradas ENDP
+
 
 sortearBit PROC 
     mov eax, 71
@@ -74,7 +174,6 @@ sortearBit ENDP
 
 
 desenhaRalph PROC
-
 	mov dl,ralph.posicaoX
     mov dh,ralph.posicaoY
     call Gotoxy
@@ -89,8 +188,8 @@ desenhaRalph PROC
     call WriteString
 	
 	ret
-
 desenhaRalph ENDP
+
 
 atualizarBit PROC
     add bit.posicaoY, 1
@@ -110,15 +209,18 @@ atualizarBit ENDP
 
 
 estadoJogar PROC
-	
 INICIAL:
     call sortearBit
+	
+	call sorteiaJanelasQuebradas
 	
 LETECLADO:
     call gotoInicio
 	mov edx, OFFSET cenario
 	call WriteString
     
+	call desenhaJanela
+	
     call desenhaRalph
     
     call atualizarBit
@@ -137,7 +239,6 @@ LETECLADO:
     call Gotoxy
     movzx eax, ralph.quantidadeVidas
     call WriteDec
-    
 	
 	jmp LETECLADO
 	
@@ -146,7 +247,6 @@ estadoJogar endp
 
 
 atualizaPersonagem PROC
-	
 	cmp dx,VK_UP
 	jne BAIXO
 	sub ralph.posicaoY, PULO_Y
@@ -180,7 +280,6 @@ DIREITA:
 L1:	
 	ret
 atualizaPersonagem endp
-
 
 
 verificaColisaoBit PROC
