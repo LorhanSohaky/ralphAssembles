@@ -57,7 +57,25 @@ JanelaStruct ENDS
 			BYTE "                                ÚÁÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ ÌÍÍÍÍÍÍÍÍÍÍÍ¹ ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÁ¿                                ",10
 			BYTE "                                ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÁÄÄÄÄÄÄÄÄÄÄÄÁÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ                                ",0
 
-	janelaQuebrada BYTE "    ÚÄÄÄ¿    ",0
+	janelaNormal   BYTE "    ÚÄÄÄ¿    ",0
+				   BYTE "ÚÄÄÄÙ   ÀÄÄÄ¿",0
+				   BYTE "ÀÂÄËÍÍÍÍÍËÄÂÙ",0
+				   BYTE " ³ º°°°°°º ³ ",0
+				   BYTE " ³ ÌÍÍÍÍÍ¹ ³ ",0
+				   BYTE " ³ º°°°°°º ³ ",0
+				   BYTE "ÚÁÍÊÍÍÍÍÍÊÍÁ¿",0
+				   BYTE "ÀÄÄÄÄÄÄÄÄÄÄÄÙ",0
+	
+	portaNormal   BYTE "ÉÍÍÍÍÍËÍÍÍÍÍ»",0
+				  BYTE "¹°°°°°º°°°°°Ì",0
+				  BYTE "¹°°°°°º°°°°°Ì",0
+				  BYTE "ÌÍÍÍÍÍÎÍÍÍÍÍ¹",0
+				  BYTE "º°°°°°º°°°°°º",0
+				  BYTE "º°°°°°º°°°°°º",0
+				  BYTE "ÌÍÍÍÍÍÊÍÍÍÍÍ¹",0
+				  BYTE "ÌÍÍÍÍÍÍÍÍÍÍÍ¹",0
+                  
+    janelaQuebrada BYTE "    ÚÄÄÄ¿    ",0
 				   BYTE "ÚÄÄÄÙ   ÀÄÄÄ¿",0
 				   BYTE "ÀÂÄËÍÍÍÍÍËÄÂÙ",0
 				   BYTE " ³ ºÛÛ°°°º ³ ",0
@@ -74,6 +92,7 @@ JanelaStruct ENDS
 				  BYTE "º°°°°°ºÛÛÛ°°º",0
 				  BYTE "ÌÍÍÍÍÍÊÍÍÍÍÍ¹",0
 				  BYTE "ÌÍÍÍÍÍÍÍÍÍÍÍ¹",0
+				  
 				  
 				  
 	ralph RalphStruct <3, 44, 36-ALTURA_RALPH>
@@ -97,51 +116,75 @@ JanelaStruct ENDS
 	
 .CODE
 
+desenhaLinha PROC USES ecx
 
-desenhaLJanela PROC USES edx ecx
-	mov ecx, edx
-	mov dh, ah
-	mov dl, (JanelaStruct PTR janela[ecx]).posicaoX
-	call Gotoxy
-	mov edx, ebx
-	call WriteString
-	add ebx, SIZEOF janelaQuebrada
-	inc ah
-	
-	ret
+    mov ecx, LARGURA_JANELA                                         ; N£mero de linhas
+    
+    rep movsb
+
+    ret
+
+desenhaLinha ENDP
+
+desenhaLJanela PROC USES ecx edi esi,
+        source: PTR BYTE,
+        conteudo: DWORD
+        
+    mov ecx, ALTURA_JANELA + 1                                      ; N£mero de linhas
+    mov edx, source
+    mov bl, (JanelaStruct PTR janela[edx]).posicaoX
+    mov bh, (JanelaStruct PTR janela[edx]).posicaoY
+    mov esi, conteudo
+DESENHA:
+    movzx edx, bl
+    mov eax, COLS
+    mul bh
+    add eax, edx
+    add eax, OFFSET cenario    
+    
+    mov edi, eax
+
+    call desenhaLinha
+    inc esi
+    inc bh
+    
+    loop DESENHA
+    
+    ret
 desenhaLJanela ENDP
 
-
 desenhaJanela PROC
-	mov ecx, QUANTIDADE_JANELAS ;//9 janelas no total
-	mov edx, 0
-	
+    mov ecx, QUANTIDADE_JANELAS
+    mov esi, 0
+    
 VERIFICA:
-	cmp edx, 7*TYPE JanelaStruct
+	cmp esi, 7 * TYPE JanelaStruct                                  ; Testando a posi‡„o 7 (porta)
 	je PORTA
-	mov ebx, OFFSET janelaQuebrada
+    cmp (JanelaStruct PTR janela[esi]).estado, 1 ;//verifica se o estado ‚ 1 (janela quebrada)
+    je JANELA_QUEBRADA
+    mov edi, OFFSET janelaNormal
+    jmp CONTINUA
+    
+JANELA_QUEBRADA:
+	mov edi, OFFSET janelaQuebrada
 	jmp CONTINUA
+    
 PORTA:
-	mov ebx, OFFSET portaQuebrada
+    cmp (JanelaStruct PTR janela[esi]).estado, 1 ;//verifica se o estado ‚ 1 (janela quebrada)
+    je PORTA_QUEBRADA
+    mov edi, OFFSET portaNormal
+    jmp CONTINUA
+    
+PORTA_QUEBRADA:
+	mov edi, OFFSET portaQuebrada
+    
 CONTINUA:
-	mov ah, (JanelaStruct PTR janela[edx]).posicaoY
-	push ecx
-	mov ecx, ALTURA_JANELA + 1 ;//n linhas
-	cmp (JanelaStruct PTR janela[edx]).estado, 1 ;//verifica se o estado ‚ 1 (janela quebrada)
-	je DESENHA
-	jne PROXIMAJANELA
+    INVOKE desenhaLJanela, esi, edi
+    add esi, TYPE JanelaStruct
+    
+    loop VERIFICA
 
-DESENHA:
-	call desenhaLJanela
-	loop DESENHA
-	
-PROXIMAJANELA:
-	pop ecx
-	inc esi
-	add edx, TYPE JanelaStruct
-	loop VERIFICA
-	
-	ret
+    ret
 desenhaJanela ENDP
 
 
@@ -230,13 +273,12 @@ INICIAL:
     call sortearBit
 	
 	call sorteiaJanelasQuebradas
+    call desenhaJanela
 	
 LETECLADO:
     call gotoInicio
 	mov edx, OFFSET cenario
 	call WriteString
-    
-	call desenhaJanela
 	
     call desenhaRalph
     
@@ -377,6 +419,14 @@ PROXIMA_JANELA:
 	
 CONCERTOU_JANELA:
 	mov (JanelaStruct PTR janela[esi]).estado, 0
+    cmp esi, 7 * TYPE JanelaStruct                                  ; Testando a posi‡„o 7 (porta)
+    jne COLOCAR_JANELA
+    mov edi, OFFSET portaNormal
+    jmp DESENHAR
+COLOCAR_JANELA:
+    mov edi, OFFSET janelaNormal
+DESENHAR:
+    INVOKE desenhaLJanela, esi, edi
 	inc janelasConcertadas
 	
 NAO_VERIFICA:
