@@ -111,6 +111,7 @@ JanelaStruct ENDS
     janelasQuebradas BYTE JANELAS_QUEBRADAS_INICIAL
 	
 	terminou BYTE 0
+    fase BYTE 1
     
     somPulo BYTE "assets\pulo.wav",0
     somColisao BYTE "assets\colisao.wav",0
@@ -271,6 +272,8 @@ atualizarBit ENDP
 estadoJogar PROC
 
 INICIAL:
+    movzx ecx, fase
+    call escreverTituloFase
     call inicializaProximaFase
     call sortearBit
 	
@@ -319,6 +322,7 @@ estadoJogar ENDP
 
 
 reseta PROC
+    mov fase, 1
 	mov janelasConcertadas, 0
     mov janelasQuebradas, JANELAS_QUEBRADAS_INICIAL
 	mov ralph.quantidadeVidas, QUANTIDADE_VIDAS
@@ -375,6 +379,7 @@ PROXIMA_FASE:
     cmp janelasQuebradas, QUANTIDADE_JANELAS
     je INVOCA_GANHOU
     add janelasQuebradas, 1
+    add fase, 1
     mov terminou, 2
     jmp SAIR_VERIFICAACABOU   
     
