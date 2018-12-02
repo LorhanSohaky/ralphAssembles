@@ -4,8 +4,8 @@ ROWS TEXTEQU %40
 GANHOU TEXTEQU %01
 PERDEU TEXTEQU %00
 
-ALTURA_RALPH TEXTEQU %2
-LARGURA_RALPH TEXTEQU %0
+ALTURA_RALPH TEXTEQU %4
+LARGURA_RALPH TEXTEQU %5
 
 ALTURA_JANELA TEXTEQU %7
 LARGURA_JANELA TEXTEQU %13
@@ -31,6 +31,7 @@ QUANTIDADE_VIDAS TEXTEQU %3
 
 CORPADRAO TEXTEQU %0Ah                                              ; Cores do jogo
 COR_BIT TEXTEQU %0Eh
+COR_CORACAO TEXTEQU %0Ch
 
 .DATA
     corAnterior BYTE ?                                              ; Cores do console antes de iniciar o jogo

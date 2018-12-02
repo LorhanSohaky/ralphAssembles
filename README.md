@@ -48,4 +48,4 @@ Os sons estão sob licença Creative Commons
 - [x] Tocar som pulo;
 - [x] Tocar som colisão com bit;
 - [x] Pintar o bit;
-- [ ] Desenhar corações
+- [x] Desenhar corações

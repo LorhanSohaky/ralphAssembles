@@ -15,6 +15,11 @@ JanelaStruct STRUCT
 	estado BYTE ?
 JanelaStruct ENDS
 
+VidaStruct STRUCT
+	posicaoX BYTE ?
+	posicaoY BYTE ?
+VidaStruct ENDS
+
 .DATA
 	cenario BYTE "                              รฤฤด  ฺมอหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสอออหสมฟ  รฤฤด                              ",10
 			BYTE "                              รฤฤด  ภยอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสออหอสอยู  รฤฤด                              ",10
@@ -99,12 +104,19 @@ JanelaStruct ENDS
     bit BitStruct <0,0>
 	janela JanelaStruct <42, 9, 0>, <63, 9, 0>, <84, 9, 0>, <42, 19, 0>, <63, 19, 0>, <84, 19, 0>, <42, 29, 0>, <63, 29, 0>, <84, 29, 0>
 	
-	desenho1 BYTE "*",0
-	desenho2 BYTE "*",0
-    
+	desenhoRalph BYTE " ()  ",0
+				 BYTE "ฺูภฟ ",0
+				 BYTE "ภยยู ",0
+				 BYTE "     ",0
+	
     desenhoBit BYTE "1", 0
-    bitPosicoes BYTE 39, 44, 57, 65, 81, 86, 98
-    
+    bitPosicoes BYTE 44, 65, 86
+	
+	desenhoVida BYTE "( \/ )",0
+				BYTE " \  / ",0
+				BYTE "  \/  ",0
+    vida VidaStruct QUANTIDADE_VIDAS DUP(<?,?>)
+	
     corConsole BYTE ?
 	
 	janelasConcertadas BYTE 0
@@ -117,6 +129,22 @@ JanelaStruct ENDS
     somColisao BYTE "assets\colisao.wav",0
 	
 .CODE
+
+inicializaVida PROC
+	movzx ecx, ralph.quantidadeVidas
+	mov eax, 0
+	mov bl, 1
+	
+PROXIMA_VIDA:
+	mov (VidaStruct PTR vida[eax]).posicaoX, 5
+	mov (VidaStruct PTR vida[eax]).posicaoY, bl
+	add eax, TYPE VidaStruct
+	add bl, 5
+	loop PROXIMA_VIDA
+	
+	ret
+inicializaVida ENDP
+
 
 desenhaLinha PROC USES ecx
     mov ecx, LARGURA_JANELA                                         ; Nฃmero de linhas
@@ -161,7 +189,7 @@ desenhaJanela PROC
 VERIFICA:
 	cmp esi, 7 * TYPE JanelaStruct                                  ; Testando a posio 7 (porta)
 	je PORTA
-    cmp (JanelaStruct PTR janela[esi]).estado, 1 ;//verifica se o estado  1 (janela quebrada)
+    cmp (JanelaStruct PTR janela[esi]).estado, 1				    ;//verifica se o estado  1 (janela quebrada)
     je JANELA_QUEBRADA
     mov edi, OFFSET janelaNormal
     jmp CONTINUA
@@ -171,7 +199,7 @@ JANELA_QUEBRADA:
 	jmp CONTINUA
     
 PORTA:
-    cmp (JanelaStruct PTR janela[esi]).estado, 1 ;//verifica se o estado  1 (janela quebrada)
+    cmp (JanelaStruct PTR janela[esi]).estado, 1 				    ;//verifica se o estado  1 (janela quebrada)
     je PORTA_QUEBRADA
     mov edi, OFFSET portaNormal
     jmp CONTINUA
@@ -189,27 +217,25 @@ CONTINUA:
 desenhaJanela ENDP
 
 
-sorteiaJanelasQuebradas PROC
-	;//call inicializaJanela ;//inicializa as posi”es iniciais X e Y das janelas
-	
+sorteiaJanelasQuebradas PROC	
 	movzx ecx, janelasQuebradas
 	
 SORTEIA:
 	call Randomize
-	mov eax, QUANTIDADE_JANELAS ;//sorteia um nฃmero de 0 a 9 em todo novo loop
+	mov eax, QUANTIDADE_JANELAS 									;//sorteia um nฃmero de 0 a 9 em todo novo loop
 	call RandomRange
 	mov bl, TYPE JanelaStruct
 	mul bl
 	
 	cmp (JanelaStruct PTR janela[eax]).estado, 1
-	je TESTE ;//Sorteia novamente
+	je TESTE 														;//Sorteia novamente
 
-	mov (JanelaStruct PTR janela[eax]).estado, 1 ;//atribui valor 1 nas janelas sortedas (representa a janela quebrada)
+	mov (JanelaStruct PTR janela[eax]).estado, 1 					;//atribui valor 1 nas janelas sortedas (representa a janela quebrada)
 	
 	loop SORTEIA
 
 TESTE:
-	inc ecx ;//Mantm o nฃmero de janelas quebradas (5)
+	inc ecx 														;//Mantm o nฃmero de janelas quebradas (5)
 	loop SORTEIA
 
 	ret
@@ -231,21 +257,65 @@ sortearBit ENDP
 
 
 desenhaRalph PROC
-	mov dl,ralph.posicaoX
-    mov dh,ralph.posicaoY
-    call Gotoxy
-	mov edx, OFFSET desenho1
-    call WriteString
+    mov ah, ralph.posicaoY
+	mov ecx, ALTURA_RALPH
+	mov ebx, OFFSET desenhoRalph
 	
-	mov dl,ralph.posicaoX
-    mov dh,ralph.posicaoY
-	add dh,1
-    call Gotoxy
-	mov edx, OFFSET desenho2
-    call WriteString
+DESENHA_LINHA:
+	mov dh, ah
+	mov dl, ralph.posicaoX
+	call Gotoxy
+	mov edx, ebx
+	call WriteString
+	add ebx, SIZEOF desenhoRalph
+	inc ah
+	loop DESENHA_LINHA	
 	
 	ret
 desenhaRalph ENDP
+
+
+desenhaLVida PROC
+	mov dh, ah
+	mov dl, (VidaStruct PTR vida[esi]).posicaoX
+	call Gotoxy
+	mov edx, ebx
+	call WriteString
+	inc ah
+	add ebx, SIZEOF desenhoVida	
+	
+	ret
+desenhaLVida ENDP
+
+
+desenhaVida PROC
+	mov eax, COR_CORACAO
+	call SetTextColor
+	movzx ecx, ralph.quantidadeVidas
+	mov esi, 0
+	
+DESENHA_PROXIMA_VIDA:
+	push ecx
+	mov ecx, 3
+	mov ah, (VidaStruct PTR vida[esi]).posicaoY
+	mov ebx, OFFSET desenhoVida
+
+DESENHA_PROXIMA_LINHA:
+	call desenhaLVida
+	cmp ecx, 0
+	dec ecx
+	ja DESENHA_PROXIMA_LINHA
+	
+	pop ecx
+	add esi, TYPE VidaStruct
+	cmp ecx, 0
+	dec ecx
+	ja DESENHA_PROXIMA_VIDA
+
+	mov eax, CORPADRAO
+	call SetTextColor
+	ret
+desenhaVida ENDP
 
 
 atualizarBit PROC
@@ -255,7 +325,6 @@ atualizarBit PROC
     call sortearBit
     
 DESENHA_BIT:
-    
     mov dl,bit.posicaoX
     mov dh,bit.posicaoY
     call Gotoxy
@@ -274,7 +343,7 @@ estadoJogar PROC
 INICIAL:
     movzx ecx, fase
     call escreverTituloFase
-    call inicializaProximaFase
+	call inicializaVida
     call sortearBit
 	
 	call sorteiaJanelasQuebradas
@@ -284,6 +353,8 @@ LETECLADO:
     call gotoInicio
 	mov edx, OFFSET cenario
 	call WriteString
+	
+	call desenhaVida
 	
     call desenhaRalph
     
@@ -299,12 +370,6 @@ LETECLADO:
 	call verificaColisaoJanela
     
     call verificaColisaoBit
-	
-    mov dh, ROWS - 3
-    mov dl, COLS - 1
-    call Gotoxy
-    movzx eax, ralph.quantidadeVidas
-    call WriteDec
 	
 	call verificaAcabou
 	
