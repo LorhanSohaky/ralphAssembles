@@ -108,6 +108,7 @@ JanelaStruct ENDS
     corConsole BYTE ?
 	
 	janelasConcertadas BYTE 0
+    janelasQuebradas BYTE JANELAS_QUEBRADAS_INICIAL
 	
 	terminou BYTE 0
     
@@ -117,14 +118,12 @@ JanelaStruct ENDS
 .CODE
 
 desenhaLinha PROC USES ecx
-
     mov ecx, LARGURA_JANELA                                         ; N£mero de linhas
-    
     rep movsb
 
     ret
-
 desenhaLinha ENDP
+
 
 desenhaLJanela PROC USES ecx edi esi,
         source: PTR BYTE,
@@ -152,6 +151,7 @@ DESENHA:
     
     ret
 desenhaLJanela ENDP
+
 
 desenhaJanela PROC
     mov ecx, QUANTIDADE_JANELAS
@@ -191,7 +191,7 @@ desenhaJanela ENDP
 sorteiaJanelasQuebradas PROC
 	;//call inicializaJanela ;//inicializa as posi‡”es iniciais X e Y das janelas
 	
-	mov ecx, JANELAS_QUEBRADAS
+	movzx ecx, janelasQuebradas
 	
 SORTEIA:
 	call Randomize
@@ -269,7 +269,9 @@ atualizarBit ENDP
 
 
 estadoJogar PROC
+
 INICIAL:
+    call inicializaProximaFase
     call sortearBit
 	
 	call sorteiaJanelasQuebradas
@@ -305,8 +307,10 @@ LETECLADO:
 	
 	cmp terminou, 1
 	je TERMINOU_JOGO
-	
-	jmp LETECLADO
+    cmp terminou, 2
+    jne LETECLADO
+    call inicializaProximaFase
+    jmp INICIAL
 
 TERMINOU_JOGO:
 	call reseta
@@ -316,6 +320,7 @@ estadoJogar ENDP
 
 reseta PROC
 	mov janelasConcertadas, 0
+    mov janelasQuebradas, JANELAS_QUEBRADAS_INICIAL
 	mov ralph.quantidadeVidas, QUANTIDADE_VIDAS
 	mov terminou, 0
 	
@@ -334,18 +339,45 @@ INICIALIZA:
 reseta ENDP
 
 
+inicializaProximaFase PROC
+	mov janelasConcertadas, 0
+	mov terminou, 0
+	
+	mov ralph.posicaoX, 44
+	mov ralph.posicaoY, 36 - ALTURA_RALPH
+	
+	mov ecx, 9
+	mov eax, 0
+	
+INICIALIZA:
+	mov (JanelaStruct PTR janela[eax]).estado, 0
+	add eax, TYPE JanelaStruct
+	loop INICIALIZA
+	
+	ret
+inicializaProximaFase ENDP
+
+
 verificaAcabou PROC
 	cmp ralph.quantidadeVidas, 0
 	je INVOCA_PERDEU
-	cmp janelasConcertadas, JANELAS_QUEBRADAS
-	je INVOCA_GANHOU
+    mov al, janelasConcertadas
+	cmp al, janelasQuebradas
+	je PROXIMA_FASE
 	jmp SAIR_VERIFICAACABOU
 
 INVOCA_PERDEU:
 	INVOKE estadoResultado, PERDEU
 	mov terminou, 1
 	jmp SAIR_VERIFICAACABOU
-	
+
+PROXIMA_FASE:
+    cmp janelasQuebradas, QUANTIDADE_JANELAS
+    je INVOCA_GANHOU
+    add janelasQuebradas, 1
+    mov terminou, 2
+    jmp SAIR_VERIFICAACABOU   
+    
 INVOCA_GANHOU:
 	INVOKE estadoResultado, GANHOU
 	mov terminou, 1
@@ -405,9 +437,11 @@ VERIFICA:
 	mov esi, 0
 	mov al, ralph.posicaoX
 	mov ah, ralph.posicaoY
-	sub al, 2
+	sub al, 2                                                       ; diferen‡a entre a posicao do ralph e a janela
 	sub ah, ALTURA_JANELA - ALTURA_RALPH
 REPETE:
+    cmp (JanelaStruct PTR janela[esi]).estado, 0
+    je PROXIMA_JANELA
 	cmp al, (JanelaStruct PTR janela[esi]).posicaoX
 	jne PROXIMA_JANELA
 	cmp ah, (JanelaStruct PTR janela[esi]).posicaoY
@@ -416,6 +450,7 @@ REPETE:
 PROXIMA_JANELA:
 	add esi, TYPE JanelaStruct
 	loop REPETE
+    jmp NAO_VERIFICA
 	
 CONCERTOU_JANELA:
 	mov (JanelaStruct PTR janela[esi]).estado, 0
