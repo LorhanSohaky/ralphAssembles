@@ -35,6 +35,7 @@ musicaMenu BYTE "assets\menu.wav",0
 ; Requer: Nada
 ;---------------------------------------------------------
 estadoMenu PROC
+    call limparTela
     call tocarSomMenu
 
 MENUJOGAR:
