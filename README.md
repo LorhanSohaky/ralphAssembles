@@ -21,6 +21,7 @@ Os sons estão sob licença Creative Commons
 * [jumping - fins](https://freesound.org/people/fins/sounds/146726/) (`pulo.wav`)
 * [hit_001 - leviclaassen](https://freesound.org/people/leviclaassen/sounds/107788/) (`colisao.wav`)
 * [sword04 - Erdie](https://freesound.org/people/Erdie/sounds/27858/) (`janela.wav`)
+* [06260 swooshy trailer punch - Robinhood76](https://freesound.org/people/Robinhood76/sounds/333124/) (`fase.wav`)
 
 
 ### TODO

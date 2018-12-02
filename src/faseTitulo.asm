@@ -1,4 +1,7 @@
 .DATA
+
+somFase BYTE "assets\fase.wav",0
+
 inicioTituloFrase   BYTE "    ______ ___    _____  ______  ",0
 					BYTE "   / ____//   |  / ___/ / ____/  ",0
 					BYTE "  / /_   / /| |  \__ \ / __/     ",0
@@ -135,8 +138,25 @@ ENQUANTO:
 	cmp eax, OFFSET finalTituloFase
     jb FACA
     
+    call tocarSomFase
     mov eax, DELAY_FASE
     call Delay
     
     ret
 escreverTituloFase ENDP
+
+
+;---------------------------------------------------------
+;                    tocarSomFase PROC
+;   Toca o som da fase
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+tocarSomFase PROC
+    mov edi, SND_FILENAME
+    or edi, SND_ASYNC
+    INVOKE PlaySound, OFFSET somFase, NULL, edi
+    
+    ret
+tocarSomFase ENDP
