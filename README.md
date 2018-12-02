@@ -34,7 +34,7 @@ Os sons estão sob licença Creative Commons
 - [x] Criação da tela de instruções;
 - [x] Criação da tela de créditos;
 - [x] Criação das telas de apresentação de fase;
-- [ ] Procedimento para inicializar posição dos personagens;
+- [x] Procedimento para inicializar posição dos personagens;
 - [x] Procedimento para verificar conserto de janela;
 - [x] Procedimento para sortear janelas quebradas;
 - [x] Procedimento para sortear bit jogado pelo inimigo Felix;
@@ -48,3 +48,4 @@ Os sons estão sob licença Creative Commons
 - [x] Tocar som pulo;
 - [x] Tocar som colisão com bit;
 - [x] Pintar o bit;
+- [ ] Desenhar corações
