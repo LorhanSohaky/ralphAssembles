@@ -127,9 +127,11 @@ VidaStruct ENDS
     desenhoBit BYTE "1", 0
     bitPosicoes BYTE 44, 65, 86
 	
-	desenhoVida BYTE "( \/ )",0
-				BYTE " \  / ",0
-				BYTE "  \/  ",0
+	desenhoVida BYTE "  ллл ллл  ",0
+				BYTE "ллллллллллл",0
+				BYTE " ллллллллл ",0
+				BYTE "   ллллл   ",0
+				BYTE "    ллл    ",0
     vida VidaStruct QUANTIDADE_VIDAS DUP(<?,?>)
 	
     corConsole BYTE ?
@@ -154,7 +156,7 @@ PROXIMA_VIDA:
 	mov (VidaStruct PTR vida[eax]).posicaoX, 5
 	mov (VidaStruct PTR vida[eax]).posicaoY, bl
 	add eax, TYPE VidaStruct
-	add bl, 5
+	add bl, 6
 	loop PROXIMA_VIDA
 	
 	ret
@@ -340,7 +342,7 @@ desenhaVida PROC
 	
 DESENHA_PROXIMA_VIDA:
 	push ecx
-	mov ecx, 3
+	mov ecx, 5
 	mov ah, (VidaStruct PTR vida[esi]).posicaoY
 	mov ebx, OFFSET desenhoVida
 

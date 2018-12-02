@@ -1,10 +1,10 @@
 .DATA
 inicioTituloFrase   BYTE "    ______ ___    _____  ______  ",0
-                    BYTE "   / ____//   |  / ___/ / ____/  ",0
-                    BYTE "  / /_   / /| |  \__ \ / __/     ",0
-                    BYTE " / __/  / ___ | ___/ // /___     ",0
-                    BYTE "/_/    /_/  |_|/____//_____/     "
-fimTituloFase       BYTE 0
+					BYTE "   / ____//   |  / ___/ / ____/  ",0
+					BYTE "  / /_   / /| |  \__ \ / __/     ",0
+					BYTE " / __/  / ___ | ___/ // /___     ",0
+					BYTE "/_/    /_/  |_|/____//_____/     "
+finalTituloFase     BYTE 0
             
 numero1     BYTE "   ___     ",10,0
             BYTE "  <  /     ",10,0
@@ -72,9 +72,12 @@ numero9     BYTE "   ____    ",10,0
 ;---------------------------------------------------------
 escreverTituloFase PROC USES ebx eax edx
     call limparTela
-    call gotoInicio
+    mov dh, 17
+	mov dl, 47
+	call Gotoxy
 	jmp INIT
 	casos DWORD CASO1, CASO2, CASO3, CASO4, CASO5, CASO6, CASO7, CASO8, CASO9
+	
 INIT:
 	mov eax, OFFSET inicioTituloFrase
 	dec ecx
@@ -111,11 +114,13 @@ CASO7:
 CASO8:
     mov ebx, OFFSET numero8
     jmp FACA
+	
 CASO9:
     mov ebx, OFFSET numero9
     jmp FACA
     
 FACA:
+	mov ecx, edx
     mov edx, eax
     call WriteString
     add eax, SIZEOF inicioTituloFrase
@@ -124,10 +129,13 @@ FACA:
     call WriteString
     add ebx, SIZEOF numero1                                         ; Todas as strings possuem a mesma largura
 ENQUANTO:
-    cmp eax, OFFSET fimTituloFase
+	mov edx, ecx
+	inc dh
+	call Gotoxy
+	cmp eax, OFFSET finalTituloFase
     jb FACA
     
-    mov eax,DELAY_FASE
+    mov eax, DELAY_FASE
     call Delay
     
     ret

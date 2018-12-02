@@ -1,23 +1,23 @@
 .DATA
 
-inicioTitulo                BYTE   "    ____          __        __       ___                                  __     __           ", 10
-                            BYTE   "   / __ \ ____ _ / /____   / /_     /   |   _____ _____ ___   ____ ___   / /_   / /___   _____", 10
-                            BYTE   "  / /_/ // __ `// // __ \ / __ \   / /| |  / ___// ___// _ \ / __ `__ \ / __ \ / // _ \ / ___/", 10
-                            BYTE   " / _, _// /_/ // // /_/ // / / /  / ___ | (__  )(__  )/  __// / / / / // /_/ // //  __/(__  ) ", 10
-                            BYTE   "/_/ |_| \__,_//_// .___//_/ /_/  /_/  |_|/____//____/ \___//_/ /_/ /_//_.___//_/ \___//____/  ", 10
-                            BYTE   "                /_/                                                                           ", 10,10,0
+inicioTitulo                BYTE   "                          ____          __        __       ___                                  __     __           ", 10
+                            BYTE   "                         / __ \ ____ _ / /____   / /_     /   |   _____ _____ ___   ____ ___   / /_   / /___   _____", 10
+                            BYTE   "                        / /_/ // __ `// // __ \ / __ \   / /| |  / ___// ___// _ \ / __ `__ \ / __ \ / // _ \ / ___/", 10
+                            BYTE   "                       / _, _// /_/ // // /_/ // / / /  / ___ | (__  )(__  )/  __// / / / / // /_/ // //  __/(__  ) ", 10
+                            BYTE   "                      /_/ |_| \__,_//_// .___//_/ /_/  /_/  |_|/____//____/ \___//_/ /_/ /_//_.___//_/ \___//____/  ", 10
+                            BYTE   "                                      /_/                                                                           ", 10,10,0
 
-creditos                    BYTE   "                                          CRDITOS                                              ", 10, 0
-creditosSelecionado         BYTE   "                                      ->  CRDITOS  <-                                          ", 10, 0
+creditos                    BYTE   "                                                                CRDITOS                                              ", 10, 0
+creditosSelecionado         BYTE   "                                                            ->  CRDITOS  <-                                          ", 10, 0
 
-jogar                       BYTE   "                                           JOGAR                                              ", 10, 0
-jogarSelecionado            BYTE   "                                       ->  JOGAR  <-                                          ", 10, 0
+jogar                       BYTE   "                                                                 JOGAR                                              ", 10, 0
+jogarSelecionado            BYTE   "                                                             ->  JOGAR  <-                                          ", 10, 0
 
-instrucoes                  BYTE   "                                         INSTRU€™ES                                              ", 10, 0
-instrucoesSelecionado       BYTE   "                                     ->  INSTRU€™ES  <-                                          ", 10, 0
+instrucoes                  BYTE   "                                                               INSTRU€™ES                                              ", 10, 0
+instrucoesSelecionado       BYTE   "                                                           ->  INSTRU€™ES  <-                                          ", 10, 0
 
-sair                        BYTE   "                                            SAIR                                                 ", 10, 0
-sairSelecionado             BYTE   "                                        ->  SAIR  <-                                             ", 10, 0
+sair                        BYTE   "                                                                  SAIR                                                 ", 10, 0
+sairSelecionado             BYTE   "                                                              ->  SAIR  <-                                             ", 10, 0
 
 
 musicaMenu BYTE "assets\menu.wav",0

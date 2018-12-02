@@ -1,7 +1,21 @@
 .DATA
 
-tituloGanhou BYTE "Ganhou!",10,0
-tituloPerdeu BYTE "Perdeu!",10,0
+tituloGanhou BYTE "   ______               __                     __",0
+			 BYTE "  / ____/____ _ ____   / /_   ____   __  __   / /",0
+			 BYTE " / / __ / __ `// __ \ / __ \ / __ \ / / / /  / / ",0
+			 BYTE "/ /_/ // /_/ // / / // / / // /_/ // /_/ /  /_/  ",0
+			 BYTE "\____/ \__,_//_/ /_//_/ /_/ \____/ \__,_/  (_)   ",0
+finalTituloGanhou BYTE 0
+
+tituloPerdeu BYTE "    ____                   __                __",0
+			 BYTE "   / __ \ ___   _____ ____/ /___   __  __   / /",0
+			 BYTE "  / /_/ // _ \ / ___// __  // _ \ / / / /  / / ",0
+			 BYTE " / ____//  __// /   / /_/ //  __// /_/ /  /_/  ",0
+			 BYTE "/_/     \___//_/    \__,_/ \___/ \__,_/  (_)   ",0
+finalTituloPerdeu BYTE 0
+
+inicioJogarNovamente BYTE "Pressione uma tecla para voltar ao menu",0
+finalJogarNovamente BYTE 0
 
 
 .CODE
@@ -16,9 +30,8 @@ tituloPerdeu BYTE "Perdeu!",10,0
 ;---------------------------------------------------------
 estadoResultado PROC resultado: BYTE
     call limparTela
-    mov  dl,0
-    mov  dh,0
-    call Gotoxy
+    mov  dh, 15
+	call Gotoxy
     cmp resultado, GANHOU
     je DESENHAR_GANHOU
     cmp  resultado, PERDEU
@@ -32,7 +45,16 @@ DESENHAR_PERDEU:
     call desenharPerdeu
     
 SAIR_RESULTADO:
-    call ReadChar
+	inc dh
+	mov dl, 50
+	call Gotoxy
+	mov ecx, OFFSET finalJogarNovamente
+    sub ecx, OFFSET inicioJogarNovamente
+    mov esi, OFFSET inicioJogarNovamente
+	mov ebx, 100
+	call escreverStringPorCaracter
+	
+	call ReadChar
     ret
 estadoResultado ENDP
 
@@ -45,9 +67,22 @@ estadoResultado ENDP
 ; Requer: Nada
 ;---------------------------------------------------------
 desenharGanhou PROC
-    mov edx, OFFSET tituloGanhou
+	mov dl, 45
+	call Gotoxy
+    mov eax, OFFSET tituloGanhou
+	
+FACA:
+	mov ecx, edx
+    mov edx, eax
     call WriteString
-    call WaitMsg
+    add eax, SIZEOF tituloGanhou
+	
+ENQUANTO:
+	mov edx, ecx
+	inc dh
+	call Gotoxy
+	cmp eax, OFFSET finalTituloGanhou
+    jb FACA
     
     ret
 desenharGanhou ENDP
@@ -60,9 +95,22 @@ desenharGanhou ENDP
 ; Requer: Nada
 ;---------------------------------------------------------
 desenharPerdeu PROC
-    mov edx, OFFSET tituloPerdeu
+	mov dl, 46
+	call Gotoxy
+    mov eax, OFFSET tituloPerdeu
+	
+FACA:
+	mov ecx, edx
+    mov edx, eax
     call WriteString
-    call WaitMsg
+    add eax, SIZEOF tituloPerdeu
+	
+ENQUANTO:
+	mov edx, ecx
+	inc dh
+	call Gotoxy
+	cmp eax, OFFSET finalTituloPerdeu
+    jb FACA
     
     ret
 desenharPerdeu ENDP
