@@ -267,8 +267,29 @@ LETECLADO:
 	jmp LETECLADO
 
 TERMINOU_JOGO:
+	call reseta
 	ret
 estadoJogar ENDP
+
+
+reseta PROC
+	mov janelasConcertadas, 0
+	mov ralph.quantidadeVidas, 3
+	mov terminou, 0
+	
+	mov ralph.posicaoX, 44
+	mov ralph.posicaoY, 36-ALTURA_RALPH
+	
+	mov ecx, 9
+	mov eax, 0
+	
+INICIALIZA:
+	mov (JanelaStruct PTR janela[eax]).estado, 0
+	add eax, TYPE JanelaStruct
+	loop INICIALIZA
+	
+	ret
+reseta ENDP
 
 
 verificaAcabou PROC
