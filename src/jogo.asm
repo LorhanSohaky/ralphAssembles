@@ -578,13 +578,13 @@ PROXIMA_JANELA:
     jmp NAO_VERIFICA
 	
 CONCERTOU_JANELA:
+    call tocarSomJanela
 	mov (JanelaStruct PTR janela[esi]).estado, 0
     cmp esi, 7 * TYPE JanelaStruct                                  ; Testando a posi‡„o 7 (porta)
     jne COLOCAR_JANELA
     mov edi, OFFSET portaNormal
     jmp DESENHAR
 COLOCAR_JANELA:
-    call tocarSomJanela
     mov edi, OFFSET janelaNormal
 DESENHAR:
     INVOKE desenhaLJanela, esi, edi
