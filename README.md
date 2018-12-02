@@ -27,7 +27,7 @@ Os sons estão sob licença Creative Commons
 - [x] Construção da máquina de estados da tela de menu;
 - [x] Criação das telas de menu;
 - [ ] ~~Construção da máquina de estados do jogo~~;
-- [ ] Criação da máquina de estados das fases;
+- [x] Criação da máquina de estados das fases;
 - [x] Procedimento para desenhar personagens e ambiente;
 - [x] Procedimento para ler dados do teclado;
 - [x] Procedimento para verificar colisão;
