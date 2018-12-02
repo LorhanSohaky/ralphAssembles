@@ -1,14 +1,14 @@
 @echo off
 
 set MAIN_FILE=main.asm
-set OUT_FILE=jogo.exe
+set OUT_FILE=ralphAssembles.exe
 set LIBPATH=lib
 set DEBUG=1
 
 set OBJ=out/%MAIN_FILE:.asm=.obj%
 set LST=out/%MAIN_FILE:.asm=.lst%
 set IN=src/%MAIN_FILE%
-set OUT=bin/%OUT_FILE%
+set OUT=%OUT_FILE%
 
 :prepare
     if %DEBUG%==1 (
@@ -20,10 +20,6 @@ set OUT=bin/%OUT_FILE%
     )
 
 :create_directory
-    if not exist "bin" (
-        mkdir bin
-    )
-
     if not exist "out" (
         mkdir out
     )
@@ -35,7 +31,5 @@ set OUT=bin/%OUT_FILE%
     @echo  Linking: %OBJ%
     link %LINKFLAGS% %OBJ% /OUT:%OUT%
     set /p teste=""
-    cd bin
-    jogo.exe
-    cd ..
+    ralphAssembles.exe
 
