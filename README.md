@@ -43,7 +43,7 @@ Os sons estão sob licença Creative Commons
 - [x] Criação da tela de perdeu;
 - [x] Procedimento para atualizar vidas;
 - [x] Procedimento para verificar resultado;
-- [ ] Procedimento para desenhar Felix;
+- [x] Procedimento para desenhar Felix;
 - [x] Tocar som menu;
 - [x] Tocar som pulo;
 - [x] Tocar som colisão com bit;

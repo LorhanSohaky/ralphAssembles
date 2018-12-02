@@ -9,6 +9,11 @@ BitStruct STRUCT
     posicaoY BYTE ?
 BitStruct ENDS
 
+FelixStruct STRUCT
+    posicaoX BYTE ?
+    posicaoY BYTE ?
+FelixStruct ENDS
+
 JanelaStruct STRUCT
 	posicaoX BYTE ?
 	posicaoY BYTE ?
@@ -102,6 +107,13 @@ JanelaStruct ENDS
 	desenho1 BYTE "*",0
 	desenho2 BYTE "*",0
     
+    felix FelixStruct <0,8 - ALTURA_FELIX>
+    
+    inicioFelix     BYTE "*",0
+                    BYTE "*",0
+    fimFelix        BYTE 0
+    
+    
     desenhoBit BYTE "1", 0
     bitPosicoes BYTE 39, 44, 57, 65, 81, 86, 98
     
@@ -124,6 +136,34 @@ desenhaLinha PROC USES ecx
 
     ret
 desenhaLinha ENDP
+
+desenhaFelix PROC
+    mov eax, COR_FELIX
+    call SetTextColor
+    
+    mov al, felix.posicaoX
+    mov ah, felix.posicaoY
+    
+    mov ecx, OFFSET fimFelix
+    sub ecx, OFFSET inicioFelix
+    
+    mov ebx, OFFSET inicioFelix
+    
+DESENHA_FELIX:
+    mov dx, ax
+    call Gotoxy
+    mov edx, ebx
+    call WriteString
+    
+    add ebx, SIZEOF inicioFelix
+    inc ah
+    loop DESENHA_FELIX
+    
+    mov eax, CORPADRAO
+    call SetTextColor
+    
+    ret
+desenhaFelix ENDP
 
 
 desenhaLJanela PROC USES ecx edi esi,
@@ -224,6 +264,7 @@ sortearBit PROC
     mov bl, bitPosicoes[eax]
     
     mov bit.posicaoX, bl
+    mov felix.posicaoX, bl
     mov bit.posicaoY, 4
     
     ret
@@ -286,6 +327,7 @@ LETECLADO:
 	call WriteString
 	
     call desenhaRalph
+    call desenhaFelix
     
     call atualizarBit
     
