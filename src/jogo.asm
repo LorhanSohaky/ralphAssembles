@@ -115,8 +115,7 @@ VidaStruct ENDS
     felix FelixStruct <0,8 - ALTURA_FELIX>
     
     inicioFelix     BYTE "*",0
-                    BYTE "*",0
-    fimFelix        BYTE 0
+    fimFelix        BYTE "*",0
     
     
 	desenhoRalph BYTE " ()  ",0
