@@ -114,15 +114,17 @@ VidaStruct ENDS
     
     felix FelixStruct <0,8 - ALTURA_FELIX>
     
-    inicioFelix     BYTE "*",0
-    fimFelix        BYTE "*",0
+    inicioFelix     BYTE ",/_) ",0
+					BYTE " (",34,") ",0
+					BYTE " /I\ ",0
+					BYTE "_|||_",0
+	fimFelix BYTE 0
     
     
-	desenhoRalph BYTE " ()  ",0
-				 BYTE "ÚÙÀ¿ ",0
-				 BYTE "ÀÂÂÙ ",0
-				 BYTE "     ",0
-	
+	desenhoRalph BYTE " (//  ",0
+				 BYTE " (,",34,")>",0
+				 BYTE "<( )' ",0
+				 BYTE " J L  ",0
 
     desenhoBit BYTE "1", 0
     bitPosicoes BYTE 44, 65, 86
@@ -170,6 +172,7 @@ desenhaLinha PROC USES ecx
     ret
 desenhaLinha ENDP
 
+
 desenhaFelix PROC
     mov eax, COR_FELIX
     call SetTextColor
@@ -177,8 +180,7 @@ desenhaFelix PROC
     mov al, felix.posicaoX
     mov ah, felix.posicaoY
     
-    mov ecx, OFFSET fimFelix
-    sub ecx, OFFSET inicioFelix
+    mov ecx, ALTURA_FELIX
     
     mov ebx, OFFSET inicioFelix
     
@@ -303,6 +305,9 @@ sortearBit ENDP
 
 
 desenhaRalph PROC
+	mov eax, COR_RALPH
+    call SetTextColor
+	
     mov ah, ralph.posicaoY
 	mov ecx, ALTURA_RALPH
 	mov ebx, OFFSET desenhoRalph
@@ -317,6 +322,8 @@ DESENHA_LINHA:
 	inc ah
 	loop DESENHA_LINHA	
 	
+	mov eax, CORPADRAO
+    call SetTextColor
 	ret
 desenhaRalph ENDP
 
