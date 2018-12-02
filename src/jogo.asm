@@ -146,6 +146,7 @@ VidaStruct ENDS
     
     somPulo BYTE "assets\pulo.wav",0
     somColisao BYTE "assets\colisao.wav",0
+    somJanela BYTE "assets\janela.wav",0
 	
 .CODE
 
@@ -583,6 +584,7 @@ CONCERTOU_JANELA:
     mov edi, OFFSET portaNormal
     jmp DESENHAR
 COLOCAR_JANELA:
+    call tocarSomJanela
     mov edi, OFFSET janelaNormal
 DESENHAR:
     INVOKE desenhaLJanela, esi, edi
@@ -674,3 +676,19 @@ tocarSomColisao PROC
     
     ret
 tocarSomColisao ENDP
+
+
+;---------------------------------------------------------
+;                    tocarSomJanela PROC
+;   Toca o som da janela
+; Entrada: Nada
+; Sa¡da: Nada
+; Requer: Nada
+;---------------------------------------------------------
+tocarSomJanela PROC
+    mov eax, SND_FILENAME
+    or eax, SND_ASYNC
+    INVOKE PlaySound, OFFSET somJanela, NULL, eax
+    
+    ret
+tocarSomJanela ENDP
