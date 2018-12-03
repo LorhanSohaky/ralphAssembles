@@ -11,11 +11,11 @@ set IN=src/%MAIN_FILE%
 set OUT=%OUT_FILE%
 
 :prepare
-    if %DEBUG%==1 (
+    if %DEBUG%==0 (
         set MLFLAGS=/nologo /c /Sf /Fl%LST% /coff /Sn /Zd /Zi /I %LIBPATH% 
         set LINKFLAGS=/DEBUG /DEBUGTYPE:COFF /NOLOGO /LIBPATH:%LIBPATH% /SUBSYSTEM:CONSOLE
     ) else (
-        set MLFLAGS=/nologo /c /Fl /coff /Sn /I %LIBPATH%
+        set MLFLAGS=/nologo /c /Fl%LST% /coff /Sn /I %LIBPATH%
         set LINKFLAGS=/NOLOGO /LIBPATH:%LIBPATH% /SUBSYSTEM:CONSOLE
     )
 
