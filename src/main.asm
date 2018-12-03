@@ -18,6 +18,10 @@ INCLUDE creditos.asm
 INCLUDE faseTitulo.asm
 INCLUDE menu.asm
 
+.DATA
+
+hIcon  dd ?                                                         ; Ícone
+
 .CODE
 
 main PROC
@@ -44,6 +48,9 @@ inicializar PROC
     mov outHandle, eax
     
     INVOKE GetConsoleCursorInfo, outHandle, OFFSET cursorInfo
+    
+    invoke  LoadIconA,eax,100
+    mov     hIcon,eax
 
     call GetTextColor
     mov corAnterior, al

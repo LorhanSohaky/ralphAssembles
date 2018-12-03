@@ -2,6 +2,8 @@ SND_ASYNC = 01h
 SND_LOOP = 08h
 SND_FILENAME =  00020000h
 
+LoadIconA PROTO :DWORD,:DWORD                                       ; Protótipo para carregar o ícone
+
 .CODE
 
 ;---------------------------------------------------------

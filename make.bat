@@ -24,12 +24,15 @@ set OUT=%OUT_FILE%
         mkdir out
     )
 
+:resource
+    rc /fo out/resource.res resource.rc
+    cvtres /NOLOGO /machine:ix86 /OUT:out/resource.obj out/resource.res
 :compile
     ml %MLFLAGS% /Fo %OBJ% %IN%
 
 :link
     @echo  Linking: %OBJ%
-    link %LINKFLAGS% %OBJ% /OUT:%OUT%
+    link %LINKFLAGS% %OBJ% /OUT:%OUT% out/resource.obj
     set /p teste=""
     ralphAssembles.exe
 
