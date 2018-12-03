@@ -17,7 +17,6 @@ finalTituloPerdeu BYTE 0
 inicioJogarNovamente BYTE "Pressione uma tecla para voltar ao menu",0
 finalJogarNovamente BYTE 0
 
-
 .CODE
 
 ;---------------------------------------------------------
@@ -55,6 +54,7 @@ SAIR_RESULTADO:
 	call escreverStringPorCaracter
 	
 	call ReadChar
+	
     ret
 estadoResultado ENDP
 
@@ -86,6 +86,7 @@ ENQUANTO:
     
     ret
 desenharGanhou ENDP
+
 
 ;---------------------------------------------------------
 ;                        desenharPerdeu PROC

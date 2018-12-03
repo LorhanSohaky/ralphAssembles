@@ -1,17 +1,19 @@
-.data
+.DATA
+
 tituloInstrucoes    BYTE "                                          ____              __                       /\//            ",10
                     BYTE "                                         /  _/____   _____ / /_ _____ __  __ _____ _//\/  ___   _____",10
                     BYTE "                                         / / / __ \ / ___// __// ___// / / // ___// __ \ / _ \ / ___/",10
                     BYTE "                                       _/ / / / / /(__  )/ /_ / /   / /_/ // /__ / /_/ //  __/(__  ) ",10
                     BYTE "                                      /___//_/ /_//____/ \__//_/    \__,_/ \___/ \____/ \___//____/  ",10
                     BYTE "                                                                           /_)                       ",10,10,0
+
 inicioTextoInstrucoes BYTE "Vocˆ possui trˆs vidas para passar por todas as fases",0
 textoInstrucoes1      BYTE "As teclas direcionais servem para movimenta‡„o",0
 textoInstrucoes2      BYTE "A tecla de espa‡o serve para consertar as janelas",0
 textoInstrucoes3      BYTE "Pressione uma tecla para voltar ao menu",0
 finalTextoInstrucoes  BYTE 0
                 
-.code
+.CODE
 
 ;---------------------------------------------------------
 ;                        estadoInstrucoesPROC
@@ -23,11 +25,14 @@ finalTextoInstrucoes  BYTE 0
 ;---------------------------------------------------------
 estadoInstrucoes PROC
     call limparTela
+	
     mov  dl, 0
     mov  dh, 0
     call Gotoxy
     call desenharInstrucoes
+	
     call ReadChar
+
     ret
 estadoInstrucoes ENDP
 

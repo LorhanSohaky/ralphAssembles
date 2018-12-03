@@ -19,11 +19,7 @@ instrucoesSelecionado       BYTE   "                                            
 sair                        BYTE   "                                                                  SAIR                                                 ", 10, 0
 sairSelecionado             BYTE   "                                                              ->  SAIR  <-                                             ", 10, 0
 
-
 musicaMenu BYTE "assets\menu.wav",0
-
-
-
 
 .CODE
 

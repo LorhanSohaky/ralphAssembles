@@ -12,7 +12,6 @@ SND_FILENAME =  00020000h
 ; Requer: Nada
 ;---------------------------------------------------------
 escreverStringPorCaracter PROC USES EAX
-    
 exibir:
     mov al, BYTE PTR [esi]
     inc esi
@@ -42,6 +41,7 @@ LIMPAR :
     jne LIMPAR
 
     INVOKE WriteConsoleOutput, outHandle, OFFSET scrBuffer, scrSize, scrCoord, OFFSET scrRect
+	
     ret
 limparTela ENDP
 
@@ -56,5 +56,6 @@ gotoInicio PROC USES ecx
     mov dl,0
     mov dh,0
     call Gotoxy
+	
     ret
 gotoInicio ENDP

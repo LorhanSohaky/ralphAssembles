@@ -48,12 +48,8 @@ inicializar PROC
     call GetTextColor
     mov corAnterior, al
     
-    
-
     mov eax, CORPADRAO
     call SetTextColor
-
-
 
     push OFFSET barraDeTitulo
     call SetConsoleTitle
@@ -66,7 +62,6 @@ inicializar PROC
     INVOKE SetConsoleWindowInfo, outHandle, 1, OFFSET scrRect
 
     ret
-
 inicializar ENDP
 
 
@@ -80,7 +75,7 @@ inicializar ENDP
 finalizar PROC
     movzx eax, corAnterior
     call SetTextColor
-    
+	
     ret
 finalizar ENDP
 

@@ -1,15 +1,15 @@
-.data
+.DATA
 
 tituloCreditos      BYTE "                                                ______        __       __ _  __              ",10
                     BYTE "                                               / ____/_____ _/_/  ____/ /(_)/ /_ ____   _____",10
                     BYTE "                                              / /    / ___// _ \ / __  // // __// __ \ / ___/",10
                     BYTE "                                             / /___ / /   /  __// /_/ // // /_ / /_/ /(__  ) ",10
                     BYTE "                                             \____//_/    \___/ \__,_//_/ \__/ \____//____/  ",10,10,0
+
 inicioTextoCreditos BYTE "Lorhan Sohaky    740951",0
 textoCreditos1      BYTE "Tha¡s  Dordan    743596",0
 textoCreditos2      BYTE "Pressione uma tecla para voltar ao menu",0
 finalTextoCreditos  BYTE 0
-
 
 .CODE
 
@@ -28,6 +28,7 @@ estadoCreditos PROC
     call Gotoxy
     call desenharCreditos
     call ReadChar
+	
     ret
 estadoCreditos ENDP
 

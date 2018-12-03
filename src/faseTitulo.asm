@@ -65,7 +65,6 @@ numero9     BYTE "   ____    ",10,0
 
 .CODE
 
-
 ;---------------------------------------------------------
 ;                    escreverTituloFase PROC
 ;   Escreve o t¡tulo da fase e o n£mero dela.
@@ -131,6 +130,7 @@ FACA:
     mov edx, ebx
     call WriteString
     add ebx, SIZEOF numero1                                         ; Todas as strings possuem a mesma largura
+
 ENQUANTO:
 	mov edx, ecx
 	inc dh
