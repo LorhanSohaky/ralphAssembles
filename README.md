@@ -1,6 +1,12 @@
 # ralph Assembles
 Jogo em Assembly para a disciplina de laboratório de arquitetura e organização de computadores 2. O jogo é desenvolvido para a arquitetura x86 para o sistema operacional Windows.
 
+## IMAGENS
+![Tela do menu](prints/tela-menu.png)
+![Tela de instrucoes](prints/tela-instrucoes.png)
+![Tela do jogo](prints/tela-jogo.png)
+![Tela de jogo](prints/tela-ganhou.png)
+
 ## LICENÇA
 **MIT** [Leia a licença](LICENSE)
 
